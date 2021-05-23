@@ -11,37 +11,43 @@ import time
 class MiniDisplay(object):
 
     def __init__(self):
-        # Init 128x64 display on hardware I2C bus
-        self.d = SSD1306_128_64(rst=None)
 
-        # Get proper display size directly from hardware
-        self.width = self.d.width
-        self.height = self.d.height
+        self.state = None
+        try:
+            # Init 128x64 display on hardware I2C bus
+            self.d = SSD1306_128_64(rst=None)
+            # Get proper display size directly from hardware
+            self.width = self.d.width
+            self.height = self.d.height
 
-        padding = -2
-        self.top = padding
-        self.bottom = self.height - padding
-        self.x = 0
+            padding = -2
+            self.top = padding
+            self.bottom = self.height - padding
+            self.x = 0
 
-        # Start the display
-        self.d.begin()
+            # Start the display
+            self.d.begin()
 
-        # Clear the display
-        self.d.clear()
-        self.d.display()
+            # Clear the display
+            self.d.clear()
+            self.d.display()
 
-        # Vytvoreni prazdneho obrazce pro vymazani displeje
-        self.image = Image.new('1', (self.width, self.height))
+            # Vytvoreni prazdneho obrazce pro vymazani displeje
+            self.image = Image.new('1', (self.width, self.height))
 
-        # Vytvoreni objektu pro kresleni
-        self.draw = ImageDraw.Draw(self.image)
+            # Vytvoreni objektu pro kresleni
+            self.draw = ImageDraw.Draw(self.image)
 
-        # Vykresleni cerneho obdelnika pro vymazani obsahu displeje
-        self.clear()
+            # Vykresleni cerneho obdelnika pro vymazani obsahu displeje
+            self.clear()
 
-        # Set font (http://www.dafont.com/bitmap.php)
-        # self.font = ImageFont.load_default()
-        self.font = ImageFont.truetype('fonts/RetroGaming.ttf', 11)
+            # Set font (http://www.dafont.com/bitmap.php)
+            # self.font = ImageFont.load_default()
+            self.font = ImageFont.truetype('fonts/RetroGaming.ttf', 11)
+            self.state = True
+
+        except RuntimeError as error:
+            self.state = False
 
     def clear(self):
         # Vykresleni cerneho obdelnika pro vymazani obsahu displeje

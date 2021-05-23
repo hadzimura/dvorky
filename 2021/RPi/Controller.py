@@ -32,13 +32,11 @@ class AKAI_LPD8(object):
         with mido.open_input(self.device_id) as inport:
             # https://mido.readthedocs.io/en/latest/message_types.html
             for msg in inport:
-                if msg.is_cc():
-                    # Control Message
-
-                    # Volume
-                    if getattr(msg, 'control'):
-                        print('{} | Volume ({}) - {}'.format(msg.type, msg.control, msg.value))
-                else:
-
-                    if getattr(msg, 'note'):
-                        print('PAD on ({}) - {}'.format(str(msg.note - 35), msg.type))
+                return msg
+                # if msg.is_cc():
+                #     # Volume
+                #     if getattr(msg, 'control'):
+                #         print('{} | Volume ({}) - {}'.format(msg.type, msg.control, msg.value))
+                # else:
+                #     if getattr(msg, 'note'):
+                #         print('PAD on ({}) - {}'.format(str(msg.note - 35), msg.type))
