@@ -47,7 +47,7 @@ class MiniDisplay(object):
         # Vykresleni cerneho obdelnika pro vymazani obsahu displeje
         self.draw.rectangle((0, 0, self.width, self.height), outline=0, fill=0)
 
-    def create(self, words, line, color):
+    def create(self, words, line=1, color=128):
 
         if line == 1:
             line = 0
@@ -63,18 +63,3 @@ class MiniDisplay(object):
         # Zobrazeni na displej
         self.d.image(self.image)
         self.d.display()
-
-
-lcd = MiniDisplay()
-a = 1
-ab = "start"
-
-while True:
-    # Vykresleni cerneho obdelnika pro vymazani obrazovky
-    lcd.clear()
-
-    # a = + 1
-    # ab = str(a) + "\n" + str(a)
-    lcd.create('test\n' + str(a), 1, 128)
-    a += 1
-    time.sleep(.1)
