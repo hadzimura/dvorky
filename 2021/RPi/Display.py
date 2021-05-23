@@ -39,13 +39,9 @@ class MiniDisplay(object):
         # Vykresleni cerneho obdelnika pro vymazani obsahu displeje
         self.clear()
 
-        # Nacteni zakladniho pisma
-        self.font = ImageFont.load_default()
-
-        # Muzeme pouzit take jine fonty, napriklad z:
-        # http://www.dafont.com/bitmap.php
-        # Pote staci umistit font do stejne slozky a nastavit:
-        # font = ImageFont.truetype('RetroComputer.ttf', 8)
+        # Set font (http://www.dafont.com/bitmap.php)
+        # self.font = ImageFont.load_default()
+        self.font = ImageFont.truetype('fonts/RetroGaming.ttf', 8)
 
     def clear(self):
         # Vykresleni cerneho obdelnika pro vymazani obsahu displeje
