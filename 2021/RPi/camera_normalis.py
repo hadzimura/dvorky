@@ -33,6 +33,5 @@ if __name__ == '__main__':
 	#              apps_path=getenv('pfl_cfg_apps'),
 	#              parameters=runtime_arg)
 	
-	# Application
 	app = CameraNormalis(midi_device='LPD8:LPD8 MIDI 1 20:0')
 	app.test_display()
