@@ -22,7 +22,7 @@ class CameraNormalis(object):
 		# Welcome message
 		self.lcd.clear()
 		self.lcd.create('CHEBSKE DVORKY\nCamera Normalis\n\nControl: {}\nRadio: {}'.format(
-			str(self.controller.state(), str(radio_state))))
+			str(self.controller.state()), str(radio_state)))
 
 	def test_display(self):
 		a = 1
