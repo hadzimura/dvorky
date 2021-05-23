@@ -12,7 +12,7 @@ class CameraNormalis(object):
 		# Init Display
 		self.lcd = MiniDisplay()
 		self.lcd.clear()
-		self.lcd.create('CHEBSKE DVORKY 2021\n\nCamera Normalis\n\nBooting system...')
+		self.lcd.create('CHEBSKE DVORKY\nCamera Normalis\n(c) 2021\nBooting system...')
 
 		self.controller = AKAI_LPD8(device_id=midi_device)
 
