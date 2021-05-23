@@ -8,6 +8,7 @@ class AKAI_LPD8(object):
 
     def __init__(self, device_id=None):
 
+        self.device_id = None
         if device_id in mido.get_input_names():
             self.device_id = device_id
             print('Found MIDI Controller Device ID: {}'.format(device_id))
@@ -19,6 +20,12 @@ class AKAI_LPD8(object):
                     print(' * {}'.format(str(midi_device)))
             except Exception as error:
                 print('MIDI Controller error: {}'.format(str(error)))
+
+    def state(self):
+        if self.device_id is None:
+            return 'Fail'
+        else:
+            return 'OK'
 
     def listen(self):
 

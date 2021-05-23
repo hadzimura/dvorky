@@ -11,10 +11,18 @@ class CameraNormalis(object):
 
 		# Init Display
 		self.lcd = MiniDisplay()
-		self.lcd.clear()
-		self.lcd.create('CHEBSKE DVORKY\nCamera Normalis\n\nBooting system...')
 
+		# Init Controller
 		self.controller = AKAI_LPD8(device_id=midi_device)
+
+		# Init Radio
+		# self.radio = Transmitter()
+		radio_state = 'Fail'
+
+		# Welcome message
+		self.lcd.clear()
+		self.lcd.create('CHEBSKE DVORKY\nCamera Normalis\n\nControl: {}\nRadio: {}'.format(
+			str(self.controller.state(), str(radio_state))))
 
 	def test_display(self):
 		a = 1
