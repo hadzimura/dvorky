@@ -48,7 +48,8 @@ knobs = [
     'time'
 ]
 
-with mido.open_input('LPD8') as inport:
+# with mido.open_input('LPD8') as inport:
+with mido.open_input('LPD8:LPD8 MIDI 1 20:0') as inport:
     # https://mido.readthedocs.io/en/latest/message_types.html
     for msg in inport:
         if msg.is_cc():
