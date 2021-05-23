@@ -21,7 +21,7 @@ class CameraNormalis(object):
 
 		# Welcome message
 		self.lcd.clear()
-		self.lcd.create('CAMERA NORMALIS\n\nControl: {}\nRadio: {}'.format(
+		self.lcd.create('CAMERA NORMALIS\n\nControl...{}\nRadio.....{}'.format(
 			str(self.controller.state()), str(radio_state)))
 
 	def test_display(self):
