@@ -58,7 +58,7 @@ class MiniDisplay(object):
         else:
             line = (line - 1) * 8
 
-        print(words, line, color)
+        # print(words, line, color)
         self.draw.text((self.x, self.top + line), str(words), font=self.font, fill=color)
         self.d.image(self.image)
         self.d.display()
@@ -79,6 +79,6 @@ while True:
 
     # a = + 1
     # ab = str(a) + "\n" + str(a)
-    lcd.create('test', 1, 128)
-
+    lcd.create('test\n' + str(a), 1, 128)
+    a += 1
     time.sleep(.1)
