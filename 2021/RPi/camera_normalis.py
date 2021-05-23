@@ -9,7 +9,11 @@ class CameraNormalis(object):
 
 	def __init__(self, midi_device=None):
 
+		# Init Display
 		self.lcd = MiniDisplay()
+		self.lcd.clear()
+		self.lcd.create('CHEBSKE DVORKY 2021\n\nCamera Normalis\n\nBooting system...')
+
 		self.controller = AKAI_LPD8(device_id=midi_device)
 
 	def test_display(self):
@@ -33,5 +37,5 @@ if __name__ == '__main__':
 	#              apps_path=getenv('pfl_cfg_apps'),
 	#              parameters=runtime_arg)
 	
-	app = CameraNormalis(midi_device='LPD8:LPD8 MIDI 1 20:0')
-	app.test_display()
+	app = CameraNormalis(midi_device='LPD8:LPD8 MIDI 1 24:0')
+	# app.test_display()
