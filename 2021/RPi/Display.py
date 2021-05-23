@@ -41,7 +41,7 @@ class MiniDisplay(object):
 
         # Set font (http://www.dafont.com/bitmap.php)
         # self.font = ImageFont.load_default()
-        self.font = ImageFont.truetype('fonts/RetroGaming.ttf', 10)
+        self.font = ImageFont.truetype('fonts/RetroGaming.ttf', 11)
 
     def clear(self):
         # Vykresleni cerneho obdelnika pro vymazani obsahu displeje
