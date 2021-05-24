@@ -61,6 +61,6 @@ class CameraNormalis(object):
 if __name__ == '__main__':
 
 	app = CameraNormalis(midi_name='LPD8')
-	# app.test_display()
-	app.test_midi()
+	app.test_display()
+	# app.test_midi()
 
