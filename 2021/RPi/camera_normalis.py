@@ -27,6 +27,7 @@ class CameraNormalis(object):
 			self.lcd.clear()
 			self.lcd.create('CAMERA NORMALIS\n\nControl... {}\nRadio....... {}'.format(
 				str(self.controller.state), str(radio_state)))
+			print('LCD welcome message sent.')
 		else:
 			print('Not Raspberry Pi platform, LCD unit initialization failed!')
 
