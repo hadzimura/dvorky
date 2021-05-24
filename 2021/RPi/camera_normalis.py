@@ -2,20 +2,20 @@
 # coding=utf-8
 
 from Display import MiniDisplay
-from Controller import AKAI_LPD8
+from Controller import AKAI_LPD8_MIDI
 import mido
 import time
 
 
 class CameraNormalis(object):
 
-	def __init__(self, midi_device=None):
+	def __init__(self, midi_name=None):
 
 		# Init Display
 		self.lcd = MiniDisplay()
 
 		# Init Controller
-		self.controller = AKAI_LPD8(device_id=midi_device)
+		self.controller = AKAI_LPD8_MIDI(device_name=midi_name)
 
 		# Init Radio
 		# self.radio = Transmitter()
@@ -23,11 +23,12 @@ class CameraNormalis(object):
 
 		# Welcome message
 		if self.lcd.state is True:
+			print('Raspberry Pi platform, initializing LCD unit...')
 			self.lcd.clear()
 			self.lcd.create('CAMERA NORMALIS\n\nControl... {}\nRadio....... {}'.format(
 				str(self.controller.state()), str(radio_state)))
 		else:
-			print('Not Raspberry Pi platform, LCD init Failed!')
+			print('Not Raspberry Pi platform, LCD unit initialization failed!')
 
 	def test_display(self):
 		a = 1
@@ -58,14 +59,7 @@ class CameraNormalis(object):
 
 if __name__ == '__main__':
 
-	# Configuration
-	# cfg = Config(basename(__file__),
-	#              configs_path=getenv('pfl_cfg_connectors'),
-	#              apps_path=getenv('pfl_cfg_apps'),
-	#              parameters=runtime_arg)
-	
-	# app = CameraNormalis(midi_device='LPD8:LPD8 MIDI 1 20:0')
-	app = CameraNormalis(midi_device='LPD8:LPD8 MIDI 1 24:0')
+	app = CameraNormalis(midi_name='LPD8')
 	# app.test_display()
 	app.test_midi()
 

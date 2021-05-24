@@ -4,28 +4,28 @@
 import mido
 
 
-class AKAI_LPD8(object):
+class AKAI_LPD8_MIDI(object):
 
-    def __init__(self, device_id=None):
+    def __init__(self, device_name=None):
 
         self.device_id = None
-        if device_id in mido.get_input_names():
-            self.device_id = device_id
-            print('Found MIDI Controller Device ID: {}'.format(device_id))
-        else:
-            print('Not Found MIDI Controller Device ID: {}'.format(device_id))
-            try:
-                print('Available Device ID(s):')
-                for midi_device in mido.get_input_names():
-                    print(' * {}'.format(str(midi_device)))
-            except Exception as error:
-                print('MIDI Controller error: {}'.format(str(error)))
+        self.state = 'Fail'
 
-    def state(self):
-        if self.device_id is None:
-            return 'Fail'
+        if device_name is None:
+            print('MIDI Controller Device Name not specified.')
+        elif device_name in mido.get_input_names():
+            self.device_id = device_name
+            self.state = 'OK'
+            print('Found MIDI Controller Device ID: {}'.format(self.device_id))
         else:
-            return 'OK'
+            for midi_device in mido.get_input_names():
+                if device_name in midi_device:
+                    self.device_id = midi_device
+                    print('Found MIDI Controller Device ID: {}'.format(self.device_id))
+                    self.state = 'OK'
+                    break
+            if self.device_id is None:
+                print('Not found any MIDI Controller Device Name as: {}'.format(device_name))
 
     def listen(self):
 
