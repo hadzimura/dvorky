@@ -31,15 +31,6 @@ class CameraNormalis(object):
 		else:
 			print('Not Raspberry Pi platform, LCD unit initialization failed!')
 
-	def test_display(self):
-		a = 1
-		while True:
-			self.lcd.clear()
-			# self.lcd.create('PAD: 1\n' + str(a), line=1, color=128)
-			self.lcd.create('PAD: 1\n' + str(a))
-			a += 1
-			time.sleep(.1)
-
 	def test_midi(self):
 
 		with mido.open_input(self.controller.device_id) as inport:
@@ -61,6 +52,5 @@ class CameraNormalis(object):
 if __name__ == '__main__':
 
 	app = CameraNormalis(midi_name='LPD8')
-	app.test_display()
-	# app.test_midi()
+	app.test_midi()
 
