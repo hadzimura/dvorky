@@ -7,7 +7,7 @@
 * Library: TMRh20/RF24, https://github.com/tmrh20/RF24/
 */
 #include <SPI.h>
-//#include <nRF24L01.h>
+#include <nRF24L01.h>
 #include <RF24.h>
 #include "printf.h"
 
@@ -20,8 +20,8 @@ void setup() {
     Serial.println(F("radio hardware is not responding!!"));
     while (1) {} // hold in infinite loop
   }
-  radio.setChannel(76);
-  radio.setPALevel(RF24_PA_LOW);     // RF24_PA_MAX is default.
+  //radio.setChannel(76);
+  //radio.setPALevel(RF24_PA_LOW);     // RF24_PA_MAX is default.
   radio.openReadingPipe(0, address);
   radio.startListening();
 
