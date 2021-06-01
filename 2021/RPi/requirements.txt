@@ -1,5 +1,0 @@
-Adafruit_SSD1306
-mido
-nrf24
-pigpio
-python-rtmidi
