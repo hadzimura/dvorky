@@ -40,11 +40,10 @@ if __name__ == "__main__":
     nrf = NRF24(pi,
                 ce=25,
                 payload_size=RF24_PAYLOAD.DYNAMIC,
-                channel=100,
-                data_rate=RF24_DATA_RATE.RATE_250KBPS,
+                channel=76,
+                data_rate=RF24_DATA_RATE.RATE_1MBPS,
                 pa_level=RF24_PA.LOW
                 )
-    nrf.set_channel(76)
     nrf.set_address_bytes(len(address))
     nrf.open_writing_pipe(address)
 
