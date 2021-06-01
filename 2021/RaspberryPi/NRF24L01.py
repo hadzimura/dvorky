@@ -26,7 +26,7 @@ if __name__ == "__main__":
     # Camera Normalis Raspberry Pi 2
     # address = 'CNRP2'
     # Camera Normalis Arduino Uno 1
-    address = 'CNTT1'
+    address = '00001'
 
     # Connect to pigpiod
     print(f'Connecting to GPIO daemon on {hostname}:{port} ...')
