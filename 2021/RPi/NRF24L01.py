@@ -24,7 +24,9 @@ if __name__ == "__main__":
     hostname = 'localhost'
     port = 8888
     # Camera Normalis Raspberry Pi 2
-    address = 'CNRP2'
+    # address = 'CNRP2'
+    # Camera Normalis Arduino Uno 1
+    address = 'CNTT1'
 
     # Connect to pigpiod
     print(f'Connecting to GPIO daemon on {hostname}:{port} ...')
@@ -35,8 +37,13 @@ if __name__ == "__main__":
 
     # Create NRF24 object.
     # PLEASE NOTE: PA level is set to MIN, because test sender/receivers are often close to each other, and then MIN works better.
-    nrf = NRF24(pi, ce=25, payload_size=RF24_PAYLOAD.DYNAMIC, channel=100, data_rate=RF24_DATA_RATE.RATE_250KBPS,
+    nrf = NRF24(pi,
+                ce=25,
+                payload_size=RF24_PAYLOAD.DYNAMIC,
+                channel=100,
+                data_rate=RF24_DATA_RATE.RATE_250KBPS,
                 pa_level=RF24_PA.LOW)
+
     nrf.set_address_bytes(len(address))
     nrf.open_writing_pipe(address)
 

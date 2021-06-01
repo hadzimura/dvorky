@@ -1,0 +1,20 @@
+Python NRF24 Simple Sender Example.
+Connecting to GPIO daemon on localhost:8888 ...
+Registers:
+----------
+CONFIG: (0xff) => no RX_DR IRQ, no TX_DS IRQ, no MAX_RT IRQ, CRC on, CRC 2 byte, Power up, RX
+EN_AA: (0xff) => P0:ACK P1:ACK P2:ACK P3:ACK P4:ACK P5:ACK
+EN_RXADDR: (0xff) => P0:on P1:on P2:on P3:on P4:on P5:on
+SETUP_AW: (0xff) => address width bytes invalid
+SETUP_RETR: (0xff) => retry delay 4000 us, retries 15
+RF_CH: (0xff) => channel=127
+RF_SETUP: (0xff) => continuos carrier on, force PLL lock on, illegal speed, 0 dBm
+STATUS: (0xff) => RX data, TX ok, TX retries bad, no pipe data, TX FIFO full
+OBSERVE_TX: (0xff) => lost packets 15, retries 15
+RPD: (0xff) => received power detector 1
+RX ADDR_PX: P0=0xffffffffff P1=0xffffffffff P2=0xff P3=0xff P4=0xff P5=0xff
+TX_ADDR: 0xffffffffff
+RX_PW_PX: P0=ff P1=ff P2=ff P3=ff P4=ff P5=ff
+FIFO_STATUS: (0xff) => TX reuse set, TX FIFO full, RX FIFO full,
+DYNPD: (0xff) => P0:on P1:on P2:on P3:on P4:on P5:on
+FEATURE: (0xff) => Dynamic payload on, ACK payload on, W_TX_PAYLOAD_NOACK on
