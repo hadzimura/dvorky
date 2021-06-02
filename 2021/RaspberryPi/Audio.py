@@ -18,7 +18,7 @@ class Player(object):
         # Start the Mixer
         pygame.mixer.pre_init(44100, 16, 2, 4096)  # frequency, size, channels, buffersize
         pygame.init()  # turn all of pygame on.
-        # pygame.mixer.init(48000, -16, 1, 1024)
+        pygame.mixer.init()
 
         self.count = 0
 
