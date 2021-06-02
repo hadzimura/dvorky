@@ -25,12 +25,12 @@ class Player(object):
         # Crerate the library of available sounds
         audio_files = glob('{}/*{}'.format(str(audio_path), str(audio_format)))
         for audio_file in audio_files:
-            a = pygame.mixer.Sound(audio_file)
-            audio_length = pygame.mixer.Sound.get_length(a)
+            # a = pygame.mixer.Sound(audio_file)
+            # audio_length = pygame.mixer.Sound.get_length(a)
             audio_name = audio_file.split('/')[-1].split('.')[0]
             for category in self.Category:
                 if category in audio_name:
-                    self.Category[category][audio_length] = audio_name
+                    self.Category[category][audio_name] = 1
                     self.count += 1
 
     def playlist(self, category):
