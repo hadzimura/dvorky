@@ -32,7 +32,7 @@ class CameraNormalis(object):
         if self.lcd.state is True:
             print('Raspberry Pi platform, initializing LCD unit...')
             self.lcd.clear()
-            self.lcd.create('CAMERA NORMALIS\n\nControl... {}\nRelays.... {}\nAudio.... {}'.format(
+            self.lcd.create('CAMERA NORMALIS\nControl... {}\nRelays.... {}\nAudio.... {}'.format(
                 str(self.controller.test), str(self.relay.test), str(self.audio.count)))
             print('LCD welcome message sent.')
         else:
