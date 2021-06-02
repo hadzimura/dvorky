@@ -92,9 +92,17 @@ class CameraNormalis(object):
 						print('{} | Volume ({}) - {}'.format(msg.type, msg.control, msg.value))
 				else:
 					if getattr(msg, 'note'):
+
+						relay = msg.note - 35
+
+						if msg.type == 'note_on':
+							self.relay.on(relay)
+						elif msg.type == 'note_off':
+							self.relay.off(relay)
+
 						self.lcd.clear()
-						self.lcd.create('PAD: {}\n' + str(str(msg.note - 35)))
-						print('PAD on ({}) - {}'.format(str(msg.note - 35), msg.type))
+						self.lcd.create('Relay: {}\n' + str(str(relay)))
+						print('Relay on ({}) - {}'.format(str(msg.note - 35), msg.type))
 
 
 if __name__ == '__main__':
