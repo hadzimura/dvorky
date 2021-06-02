@@ -3,5 +3,6 @@ mido
 nrf24
 pigpio
 playsound
+pygame
 python-rtmidi
 RPi
