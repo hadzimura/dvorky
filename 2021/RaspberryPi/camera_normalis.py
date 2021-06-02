@@ -23,7 +23,14 @@ class Relay(object):
 
 		GPIO.setup(self.pins, GPIO.OUT)
 
-		self.state = self.self_test()
+		self.test = self.self_test()
+
+		self.state = {
+			1: None,
+			2: None,
+			3: None,
+			4: None
+		}
 
 	def self_test(self):
 
@@ -46,9 +53,11 @@ class Relay(object):
 
 	def on(self, relay_number):
 		GPIO.output(self.pinout[relay_number], GPIO.HIGH)
+		self.state[relay_number] = True
 
 	def off(self, relay_number):
 		GPIO.output(self.pinout[relay_number], GPIO.LOW)
+		self.state[relay_number] = False
 
 	@staticmethod
 	def shutdown(self):
@@ -96,9 +105,12 @@ class CameraNormalis(object):
 						relay = msg.note - 35
 
 						if msg.type == 'note_on':
-							self.relay.on(relay)
-						elif msg.type == 'note_off':
-							self.relay.off(relay)
+							if self.relay.state[relay] is None:
+								self.relay.on(relay)
+							elif self.relay.state[relay] is True:
+								self.relay.off(relay)
+							elif self.relay.state[relay] is False:
+								self.relay.on(relay)
 
 						self.lcd.clear()
 						self.lcd.create('Relay: {}\n' + str(str(relay)))
