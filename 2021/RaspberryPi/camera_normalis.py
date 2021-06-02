@@ -4,7 +4,7 @@
 from Audio import Player
 from Controller import AKAI_LPD8_MIDI
 from Display import LcdMini
-# from Relay import FourPortRelay
+from Relay import FourPortRelay
 
 import mido
 
@@ -82,7 +82,7 @@ if __name__ == '__main__':
 
     app = CameraNormalis(playtime=playtime,
                          midi=AKAI_LPD8_MIDI(device_name='LPD8'),
-                         # relay=FourPortRelay(relay_pinout, self_test=False),
+                         relay=FourPortRelay(relay_pinout, self_test=False),
                          audio=Player(audio_folder, audio_format='mp3'),
                          display=LcdMini())
     app.test_midi()
