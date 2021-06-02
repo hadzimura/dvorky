@@ -16,9 +16,9 @@ class Player(object):
     def __init__(self, audio_path=None, audio_format='wav'):
 
         # Start the Mixer
-        pygame.mixer.pre_init(44100, 16, 2, 4096)  # frequency, size, channels, buffersize
-        pygame.init()  # turn all of pygame on.
-        pygame.mixer.init()
+        # pygame.mixer.pre_init(48000, -16, 1, 1024)  # frequency, size, channels, buffersize
+        # pygame.init()  # turn all of pygame on.
+        pygame.mixer.init(48000, -16, 1, 1024)
 
         self.count = 0
 
