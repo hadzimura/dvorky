@@ -69,7 +69,7 @@ if __name__ == '__main__':
         4: 18
     }
 
-    audio_folder = '../source/'
+    audio_folder = '../source'
 
     app = CameraNormalis(midi_name='LPD8',
                          relays=FourPortRelay(relay_pinout, self_test=False),
