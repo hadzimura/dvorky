@@ -23,7 +23,7 @@ class CameraNormalis(object):
         self.relay = relay
 
         # Init Controller
-        self.controller = AKAI_LPD8_MIDI(device_name=midi)
+        self.controller = midi
 
         # Init Audio subsystem
         self.audio = audio
