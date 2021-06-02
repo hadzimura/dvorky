@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding=utf-8
 
-from Audio import Samples
+from Audio import Library
 from Controller import AKAI_LPD8_MIDI
 from Display import LcdMini
 from Relay import FourPortRelay
@@ -20,7 +20,7 @@ class CameraNormalis(object):
         self.relay = relays
 
         # Init Controller
-        self.controller = AKAI_LPD8_MIDI(device_name=midi_name)
+        self.controller = AKAI_LPD8_MIDI(device_name=midi)
 
         # Welcome message
         if self.lcd.state is True:
@@ -62,6 +62,12 @@ class CameraNormalis(object):
 
 
 if __name__ == '__main__':
+
+
+    a = Library()
+    a.list()
+    exit()
+
     relay_pinout = {
         1: 14,
         2: 15,
@@ -69,9 +75,12 @@ if __name__ == '__main__':
         4: 18
     }
 
+    playtime = 10
+
     audio_folder = '../source'
 
-    app = CameraNormalis(midi_name='LPD8',
+    app = CameraNormalis(playtime=playtime,
+                         midi_name='LPD8',
                          relays=FourPortRelay(relay_pinout, self_test=False),
                          samples=Samples(audio_folder),
                          display=LcdMini())
