@@ -23,8 +23,8 @@ class Relay(object):
 		
 		# setting the mode for all pins so all will be switched on
 		GPIO.setup(self.pins, GPIO.OUT)
-		GPIO.cleanup()
-		time.sleep(0.5)
+		# GPIO.cleanup()
+		# time.sleep(0.5)
 
 
 	def self_test(self, pin):
