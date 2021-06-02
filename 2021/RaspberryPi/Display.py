@@ -8,7 +8,7 @@ from PIL import ImageFont
 import time
 
 
-class MiniDisplay(object):
+class LcdMini(object):
 
     def __init__(self):
 

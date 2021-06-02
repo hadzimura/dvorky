@@ -1,84 +1,20 @@
 #!/usr/bin/env python3
 # coding=utf-8
 
+from Audio import Samples
 from Controller import AKAI_LPD8_MIDI
-from Display import MiniDisplay
-from glob import glob
+from Display import LcdMini
+from Relay import FourPortRelay
+
 import mido
-import RPi.GPIO as GPIO
-import time
-
-
-class Samples(object):
-
-    def __init__(self, audio_path=None):
-        files = glob(audio_path + '*.wav')
-        print(files)
-
-
-class Relay(object):
-
-    def __init__(self, pinout):
-
-        # Setting a current GPIO mode
-        GPIO.setmode(GPIO.BCM)
-
-        # Removing the warnings
-        GPIO.setwarnings(False)
-
-        self.pinout = pinout
-        self.pins = list(self.pinout.values())
-
-        GPIO.setup(self.pins, GPIO.OUT)
-
-        self.test = self.self_test()
-
-        self.state = {
-            1: None,
-            2: None,
-            3: None,
-            4: None
-        }
-
-    def self_test(self):
-
-        """ Test all the relays """
-        relay_state = 'OK'
-        for pin in self.pinout:
-            current_pin = self.pinout[pin]
-            GPIO.output(current_pin, GPIO.HIGH)
-            time.sleep(0.5)
-            GPIO.output(current_pin, GPIO.LOW)
-            time.sleep(0.5)
-
-            # Checking if the current relay is running and printing it
-            if not GPIO.input(current_pin):
-                print('Relay {} on Pin {}: OK'.format(str(pin), current_pin))
-            else:
-                print('Relay {} on Pin {}: ERROR'.format(str(pin), current_pin))
-                relay_state = 'Fail'
-        return relay_state
-
-    def on(self, relay_number):
-        GPIO.output(self.pinout[relay_number], GPIO.HIGH)
-        self.state[relay_number] = True
-
-    def off(self, relay_number):
-        GPIO.output(self.pinout[relay_number], GPIO.LOW)
-        self.state[relay_number] = False
-
-    @staticmethod
-    def shutdown(self):
-        """ Turn the board off """
-        GPIO.cleanup()
 
 
 class CameraNormalis(object):
 
-    def __init__(self, midi_name=None, relays=None, samples=None):
+    def __init__(self, midi=None, relays=None, samples=None, display=None):
 
         # Init Display
-        self.lcd = MiniDisplay()
+        self.lcd = display
 
         # Init Relays
         self.relay = relays
@@ -136,6 +72,7 @@ if __name__ == '__main__':
     audio_folder = '../source/'
 
     app = CameraNormalis(midi_name='LPD8',
-                         relays=Relay(relay_pinout),
-                         samples=Samples(audio_folder))
+                         relays=FourPortRelay(relay_pinout, self_test=False),
+                         samples=Samples(audio_folder),
+                         display=LcdMini())
     app.test_midi()
