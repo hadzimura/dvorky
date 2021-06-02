@@ -46,14 +46,16 @@ class Relay(object):
 			else:
 				print('Relay {} on Pin {}: ERROR'.format(str(pin), current_pin))
 
-		# Turn all relays off
-		GPIO.cleanup()
 
 	def on(self, relay):
 		GPIO.output(self.pinout[relay], GPIO.HIGH)
 
 	def off(self, relay):
 		GPIO.output(self.pinout[relay], GPIO.LOW)
+
+	def shutdown(self):
+		""" Turn the board off """
+		GPIO.cleanup()
 
 
 class CameraNormalis(object):
