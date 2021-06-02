@@ -24,8 +24,6 @@ class Relay(object):
 
 		# setting the mode for all pins so all will be switched on
 		GPIO.setup(self.pins, GPIO.OUT)
-		# GPIO.cleanup()
-		# time.sleep(0.5)
 
 	def _relay_to_pin(self, pinout):
 		""" Convert the config dictionary to pin internal values """
@@ -41,13 +39,15 @@ class Relay(object):
 			time.sleep(0.5)
 			GPIO.output(current_pin, GPIO.LOW)
 			time.sleep(0.5)
-			# GPIO.cleanup()
 
 			# Checking if the current relay is running and printing it
 			if not GPIO.input(current_pin):
 				print('Relay {} on Pin {}: OK'.format(str(pin), current_pin))
 			else:
 				print('Relay {} on Pin {}: ERROR'.format(str(pin), current_pin))
+
+		# Turn all relays off
+		GPIO.cleanup()
 
 	def on(self, relay):
 		GPIO.output(self.pinout[relay], GPIO.HIGH)
@@ -107,10 +107,18 @@ if __name__ == '__main__':
 		4: 18
 	}
 
-	r = Relay(relay_pinout)
-	r.self_test()
+	relay = Relay(relay_pinout)
+	relay.self_test()
+
+	time.sleep(1)
+	relay.on(1)
+	time.sleep(1)
+	relay.on(2)
+	time.sleep(1)
+	relay.on(3)
+	time.sleep(1)
+	relay.on(4)
 	exit()
-	
 	app = CameraNormalis(midi_name='LPD8')
 	app.test_midi()
 
