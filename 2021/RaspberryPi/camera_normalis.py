@@ -11,28 +11,24 @@ import time
 class Relay(object):
 	
 	def __init__(self, pinout):
-		
+
 		# Setting a current GPIO mode
 		GPIO.setmode(GPIO.BCM)
 		
 		# Removing the warnings
 		GPIO.setwarnings(False)
 		
-		# creating a list (array) with the number of GPIO's that we use
 		self.pinout = pinout
 		self.pins = list(self.pinout.values())
 
-		# setting the mode for all pins so all will be switched on
 		GPIO.setup(self.pins, GPIO.OUT)
 
-	def _relay_to_pin(self, pinout):
-		""" Convert the config dictionary to pin internal values """
-		return
+		self.state = self.self_test()
 
 	def self_test(self):
 
 		""" Test all the relays """
-
+		relay_state = 'OK'
 		for pin in self.pinout:
 			current_pin = self.pinout[pin]
 			GPIO.output(current_pin, GPIO.HIGH)
@@ -45,14 +41,16 @@ class Relay(object):
 				print('Relay {} on Pin {}: OK'.format(str(pin), current_pin))
 			else:
 				print('Relay {} on Pin {}: ERROR'.format(str(pin), current_pin))
+				relay_state = 'Fail'
+		return relay_state
 
+	def on(self, relay_number):
+		GPIO.output(self.pinout[relay_number], GPIO.HIGH)
 
-	def on(self, relay):
-		GPIO.output(self.pinout[relay], GPIO.HIGH)
+	def off(self, relay_number):
+		GPIO.output(self.pinout[relay_number], GPIO.LOW)
 
-	def off(self, relay):
-		GPIO.output(self.pinout[relay], GPIO.LOW)
-
+	@staticmethod
 	def shutdown(self):
 		""" Turn the board off """
 		GPIO.cleanup()
@@ -60,24 +58,23 @@ class Relay(object):
 
 class CameraNormalis(object):
 
-	def __init__(self, midi_name=None):
+	def __init__(self, midi_name=None, relays=None):
 
 		# Init Display
 		self.lcd = MiniDisplay()
 
+		# Init Relays
+		self.relay = relays
+
 		# Init Controller
 		self.controller = AKAI_LPD8_MIDI(device_name=midi_name)
-
-		# Init Radio
-		# self.radio = Transmitter()
-		radio_state = 'Fail'
 
 		# Welcome message
 		if self.lcd.state is True:
 			print('Raspberry Pi platform, initializing LCD unit...')
 			self.lcd.clear()
-			self.lcd.create('CAMERA NORMALIS\n\nControl... {}\nRadio....... {}'.format(
-				str(self.controller.state), str(radio_state)))
+			self.lcd.create('CAMERA NORMALIS\n\nControl... {}\nRelays.... {}'.format(
+				str(self.controller.state), str(self.relay.state)))
 			print('LCD welcome message sent.')
 		else:
 			print('Not Raspberry Pi platform, LCD unit initialization failed!')
@@ -109,18 +106,6 @@ if __name__ == '__main__':
 		4: 18
 	}
 
-	relay = Relay(relay_pinout)
-	relay.self_test()
-
-	time.sleep(1)
-	relay.on(1)
-	time.sleep(1)
-	relay.on(2)
-	time.sleep(1)
-	relay.on(3)
-	time.sleep(1)
-	relay.on(4)
-	exit()
-	app = CameraNormalis(midi_name='LPD8')
+	app = CameraNormalis(midi_name='LPD8', relays=Relay(relay_pinout))
 	app.test_midi()
 
