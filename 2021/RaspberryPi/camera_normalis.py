@@ -83,7 +83,7 @@ class CameraNormalis(object):
 			print('Raspberry Pi platform, initializing LCD unit...')
 			self.lcd.clear()
 			self.lcd.create('CAMERA NORMALIS\n\nControl... {}\nRelays.... {}'.format(
-				str(self.controller.state), str(self.relay.state)))
+				str(self.controller.test), str(self.relay.test)))
 			print('LCD welcome message sent.')
 		else:
 			print('Not Raspberry Pi platform, LCD unit initialization failed!')
