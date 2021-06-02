@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding=utf-8
 
-from Audio import Library
+from Audio import Player
 from Controller import AKAI_LPD8_MIDI
 from Display import LcdMini
 from Relay import FourPortRelay
@@ -11,23 +11,29 @@ import mido
 
 class CameraNormalis(object):
 
-    def __init__(self, midi=None, relays=None, samples=None, display=None):
+    def __init__(self, playtime=10, midi=None, relay=None, audio=None, display=None):
+
+        # Set the exhibition cycle time (minutes)
+        self.playtime = playtime
 
         # Init Display
         self.lcd = display
 
         # Init Relays
-        self.relay = relays
+        self.relay = relay
 
         # Init Controller
         self.controller = AKAI_LPD8_MIDI(device_name=midi)
+
+        # Init Audio subsystem
+        self.audio = audio
 
         # Welcome message
         if self.lcd.state is True:
             print('Raspberry Pi platform, initializing LCD unit...')
             self.lcd.clear()
-            self.lcd.create('CAMERA NORMALIS\n\nControl... {}\nRelays.... {}'.format(
-                str(self.controller.test), str(self.relay.test)))
+            self.lcd.create('CAMERA NORMALIS\n\nControl... {}\nRelays.... {}\nAudio.... {}'.format(
+                str(self.controller.test), str(self.relay.test), str(self.audio.count)))
             print('LCD welcome message sent.')
         else:
             print('Not Raspberry Pi platform, LCD unit initialization failed!')
@@ -63,11 +69,6 @@ class CameraNormalis(object):
 
 if __name__ == '__main__':
 
-
-    a = Library()
-    a.list()
-    exit()
-
     relay_pinout = {
         1: 14,
         2: 15,
@@ -80,8 +81,8 @@ if __name__ == '__main__':
     audio_folder = '../source'
 
     app = CameraNormalis(playtime=playtime,
-                         midi_name='LPD8',
-                         relays=FourPortRelay(relay_pinout, self_test=False),
-                         samples=Samples(audio_folder),
+                         midi=AKAI_LPD8_MIDI(device_name='LPD8'),
+                         relay=FourPortRelay(relay_pinout, self_test=False),
+                         audio=Player(audio_folder, audio_format='wav'),
                          display=LcdMini())
     app.test_midi()

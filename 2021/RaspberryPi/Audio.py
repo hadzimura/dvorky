@@ -5,7 +5,7 @@ from glob import glob
 import pygame
 
 
-class Library(object):
+class Player(object):
 
     Category = {
         'ambient': dict(),
@@ -15,16 +15,23 @@ class Library(object):
 
     def __init__(self, audio_path=None, audio_format='wav'):
 
-        # Read and categorize all the available audio files
+        # Start the Mixer
+        pygame.mixer.init(48000, -16, 1, 1024)
+
+        self.count = 0
+
+        # Crerate the library of available sounds
         audio_files = glob('{}/*{}'.format(str(audio_path), str(audio_format)))
         for audio_file in audio_files:
-            audio_length = pygame.mixer.Sound.get_length(audio_file)
+            a = pygame.mixer.Sound(audio_file)
+            audio_length = pygame.mixer.Sound.get_length(a)
             audio_name = audio_file.split('/')[-1].split('.')[0]
             for category in self.Category:
                 if category in audio_name:
                     self.Category[category][audio_length] = audio_name
+                    self.count += 1
 
-    def get(self, category):
+    def playlist(self, category):
         """ Get one random """
         pass
 
@@ -33,7 +40,7 @@ class Library(object):
             print(category)
             print('---')
             for timelenght in sorted(self.Category[category]):
-                print('{}: {}'.format(str(timelenght), str(self.Category[category][timelenght])))
+                print('{}: {}'.format(str(int(timelenght)), str(self.Category[category][timelenght])))
 
 #
 # class Player(object):
