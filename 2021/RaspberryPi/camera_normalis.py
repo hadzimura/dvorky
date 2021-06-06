@@ -103,3 +103,5 @@ if __name__ == '__main__':
         app.relay.off(2)
         app.relay.on(3)
         app.relay.off(4)
+        while True:
+            pass
