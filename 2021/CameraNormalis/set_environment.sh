@@ -16,11 +16,11 @@ sudo systemctl start pigpiod
 # 3) Press UP to increase the volume level
 
 # SystemD
-sudo cp systemd/camera_daemonis.service /etc/systemd/system/camera_daemonis.service
-sudo systemctl enable camera_daemonis.service
+sudo cp /home/pi/dvorky/2021/CameraNormalis/systemd/camera-daemonis.service /etc/systemd/system/camera-daemonis.service
+sudo systemctl enable camera-daemonis.service
 
-sudo systemctl start camera_daemonis.service
-sudo systemctl stop camera_daemonis.service
+sudo systemctl start camera-daemonis.service
+sudo systemctl stop camera-daemonis.service
 
 # Allow shutdown for the pi user
 sudo passwd root
