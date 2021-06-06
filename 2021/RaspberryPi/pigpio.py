@@ -12,6 +12,7 @@ import signal
 import subprocess
 import sys
 import time
+import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
 
 
 class CameraNormalis(object):
