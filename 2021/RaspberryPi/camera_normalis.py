@@ -24,7 +24,10 @@ class CameraNormalis(object):
         self.relay = relay
 
         # Init Controller
-        self.controller = midi
+        if midi is None:
+            self.controller.test = 'Pass'
+        else:
+            self.controller = midi
 
         # Init Audio subsystem
         self.audio = audio
