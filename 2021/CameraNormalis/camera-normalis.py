@@ -34,7 +34,7 @@ class CameraNormalis(object):
             self.controller = AKAI_LPD8_MIDI(device_name=cn_config['midi_device'])
 
             # Init Relays with initial self-test enabled
-            self.relay = FourPortRelay(cn_config['relays'], self_test=True)
+            self.relay = FourPortRelay(cn_config['relays'])
 
         elif self.runtime_mode == 'showtime':
 
