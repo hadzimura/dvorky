@@ -26,26 +26,26 @@ class CameraNormalis(object):
         self.state = None
         self.cn_pid = None
 
-        # GPIO.setmode(GPIO.BOARD)
+        GPIO.setmode(GPIO.BOARD)
 
-        self.red_diode = LED(5)
-        self.red_diode.blink(on_time=0.25, off_time=0.25, n=12)
-        time.sleep(3)
-        self.red_diode.blink(on_time=0.5, off_time=0.5, n=14)
-        time.sleep(7)
+        self.switch_up = 31
+        self.switch_down = 33
+
+        GPIO.setup(self.switch_up, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        GPIO.setup(self.switch_down, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+
+
+        while True:
+            if GPIO.input(self.switch_up) == GPIO.HIGH:
+                print("Switch UP")
+            if GPIO.input(self.switch_down) == GPIO.HIGH:
+                print("Switch DOWN")
+
         exit()
 
-        # GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
-        # Switch UP
-        # TODO
-
-        # Switch DOWN
-        # TODO
 
         # LED diode
         self.red_diode = LED(5)
-        # pi = pigpio.pi()
-        # pi.set_mode(5, pigpio.OUTPUT)
 
     def daemon(self):
 
@@ -64,12 +64,12 @@ class CameraNormalis(object):
                 if timer == 0:
                     timer = time.time()
                     # Diode turned off – first blink it for 3 seconds rapidly...
-                    self.red_diode.blink(on_time=0.3, off_time=0.3)
+                    self.red_diode.blink(on_time=0.25, off_time=0.25, n=12)
                     mode_set = 'showtime'
 
                 if 3 < time.time() - timer < 10 and mode_set == 'showtime':
                     # Diode blinked for 3 seconds – secondly blink it for 7 seconds slowly...
-                    self.red_diode.blink(on_time=0.6, off_time=0.6)
+                    self.red_diode.blink(on_time=0.5, off_time=0.5, n=14)
                     mode_set = 'config'
 
                 if time.time() - timer > 10:
@@ -81,6 +81,9 @@ class CameraNormalis(object):
 
             # Switch up
             if a == 2:
+
+                # Light the diode (stop blinking)
+                self.red_diode.on()
 
                 if self.state is None:
                     # Never started = run Camera Normalis
