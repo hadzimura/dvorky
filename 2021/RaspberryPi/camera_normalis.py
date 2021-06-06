@@ -24,10 +24,7 @@ class CameraNormalis(object):
         self.relay = relay
 
         # Init Controller
-        if midi is None:
-            self.controller.test = 'Pass'
-        else:
-            self.controller = midi
+        self.controller = midi
 
         # Init Audio subsystem
         self.audio = audio
@@ -91,13 +88,13 @@ if __name__ == '__main__':
     if args.config is True:
         app = CameraNormalis(playtime=None,
                              midi=AKAI_LPD8_MIDI(device_name='LPD8'),
-                             relay=FourPortRelay(relay_pinout, self_test=False),
+                             relay=FourPortRelay(relay_pinout, self_test=True),
                              audio=Player(audio_folder, audio_format='mp3'),
                              display=LcdMini())
         app.test_midi()
     else:
         app = CameraNormalis(playtime=playtime,
-                             midi=None,
+                             midi=AKAI_LPD8_MIDI(device_name='LPD8'),
                              relay=FourPortRelay(relay_pinout, self_test=False),
                              audio=Player(audio_folder, audio_format='mp3'),
                              display=LcdMini())
