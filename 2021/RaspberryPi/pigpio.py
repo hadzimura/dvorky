@@ -26,13 +26,13 @@ class CameraNormalis(object):
         self.state = None
         self.cn_pid = None
 
-        GPIO.setmode(GPIO.BOARD)
+        # GPIO.setmode(GPIO.BOARD)
 
         self.red_diode = LED(5)
         self.red_diode.blink(on_time=0.6, off_time=0.6)
         exit()
 
-        GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
+        # GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         # Switch UP
         # TODO
 
