@@ -4,7 +4,7 @@ After=network.target
 
 [Service]
 ExecStart=/usr/bin/python -u camera_daemonis.py
-WorkingDirectory=/home/pi/dvorce/2021/CameraNormalis/
+WorkingDirectory=/home/pi/dvorky/2021/CameraNormalis
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
