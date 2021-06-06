@@ -7,7 +7,6 @@ from gpiozero import LED
 from os.path import isfile
 from os import kill
 from os import system
-import pigpio
 import signal
 import subprocess
 import sys
@@ -54,6 +53,31 @@ class CameraNormalis(object):
         # Main endless loop
         while True:
 
+            # Switch is UP
+            if GPIO.input(self.switch_up) == GPIO.HIGH:
+
+                print('timer: {}'.format(str(timer)))
+
+                # Light the diode (stop blinking)
+                self.red_diode.on()
+
+                if self.state is None:
+                    # Never started = run Camera Normalis
+                    print('Executing for the first time')
+                    # self.run()
+                    self.state = True
+                elif 0 < timer < 3:
+                    # Switch was flipped down for less than 3 seconds = run showtime
+                    print('Executing SHOWTIME')
+                    # self.run()
+                elif 3 < timer < 10:
+                    # Switch was flipped down for more than 3 seconds and less than 10 seconds = run config
+                    print('Executing CONFIG')
+                    self.run('config')
+
+                # Reset the timer
+                timer = 0
+
             # Switch is DOWN
             if GPIO.input(self.switch_down) == GPIO.HIGH:
 
@@ -76,29 +100,6 @@ class CameraNormalis(object):
                     print('Executing SHUTDOWN')
                     exit()
                     # self.shutdown()
-
-            # Switch is UP
-            if GPIO.input(self.switch_up) == GPIO.HIGH:
-
-                # Light the diode (stop blinking)
-                self.red_diode.on()
-
-                if self.state is None:
-                    # Never started = run Camera Normalis
-                    print('Executing for the first time')
-                    # self.run()
-                    self.state = True
-                elif 0 < timer < 3:
-                    # Switch was flipped down for less than 3 seconds = run showtime
-                    print('Executing SHOWTIME')
-                    # self.run()
-                elif 3 < timer < 10:
-                    # Switch was flipped down for more than 3 seconds and less than 10 seconds = run config
-                    print('Executing CONFIG')
-                    self.run('config')
-
-                # Reset the timer
-                timer = 0
 
     def run(self, run_mode=None):
 
