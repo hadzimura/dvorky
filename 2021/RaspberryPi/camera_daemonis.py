@@ -116,9 +116,17 @@ class CameraNormalis(object):
         process = subprocess.Popen([sys.executable,
                                     self.cn_script, run_mode],
                                    stdout=subprocess.PIPE,
-                                   stderr=subprocess.STDOUT,
+                                   stderr=subprocess.PIPE,
                                    shell=False)
-
+        out, err = process.communicate()
+        if out:
+            print("standard output of subprocess:")
+            print(out)
+        if err:
+            print("standard error of subprocess:")
+            print(err)
+        print("returncode of subprocess:")
+        print(process.returncode)
         # Store the current running instance PID
         print(process.pid)
         self.cn_pid = process.pid
