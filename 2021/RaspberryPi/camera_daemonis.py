@@ -73,7 +73,7 @@ class CameraNormalis(object):
                     timer = 0
                     # Switch was flipped down for less than 3 seconds = run showtime
                     print('Executing SHOWTIME')
-                    self.run()
+                    self.run('showtime')
                 elif 3 < time.time() - timer < 10:
                     timer = 0
                     # Switch was flipped down for more than 3 seconds and less than 10 seconds = run config
@@ -103,7 +103,7 @@ class CameraNormalis(object):
                     time.sleep(3)
                     self.shutdown()
 
-    def run(self, run_mode=''):
+    def run(self, run_mode='-s'):
 
         """ Manage the running version of Camera Normalis """
 

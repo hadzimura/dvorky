@@ -72,6 +72,7 @@ if __name__ == '__main__':
 
     parser = argparse.ArgumentParser()
     parser.add_argument("-c", "--config", help="Enter the configuration mode", default=False, action="store_true")
+    parser.add_argument("-s", "--showtime", help="Enter the showtime mode", default=False, action="store_true")
     args = parser.parse_args()
 
     relay_pinout = {
@@ -92,7 +93,7 @@ if __name__ == '__main__':
                              audio=Player(audio_folder, audio_format='mp3'),
                              display=LcdMini())
         app.test_midi()
-    else:
+    elif args.showtime is True:
         app = CameraNormalis(playtime=playtime,
                              midi=AKAI_LPD8_MIDI(device_name='LPD8'),
                              relay=FourPortRelay(relay_pinout, self_test=False),
