@@ -19,7 +19,15 @@ class CameraNormalis(object):
 
     def __init__(self, cn_file):
 
+        GPIO.setmode(GPIO.BOARD)
+
+        # LED diode
+        self.red_diode = LED(5)
+
+        # Test if Camera Normalis script is to be found
         if isfile(cn_file) is False:
+            # Blink crazily!
+            self.red_diode.blink(on_time=0.1, off_time=0.1)
             print('Main executable not found. Exiting.')
             exit(1)
 
@@ -27,26 +35,20 @@ class CameraNormalis(object):
         self.state = None
         self.cn_pid = None
 
-        GPIO.setmode(GPIO.BOARD)
-
+        # Define front plate switch pins
         self.switch_up = 31
         self.switch_down = 33
 
+        # Setup the initial pins values
         GPIO.setup(self.switch_up, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         GPIO.setup(self.switch_down, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 
         while True:
-            if GPIO.input(self.switch_up) == GPIO.HIGH:
+
                 print("Switch UP")
-            if GPIO.input(self.switch_down) == GPIO.HIGH:
+
                 print("Switch DOWN")
-
-        exit()
-
-
-        # LED diode
-        self.red_diode = LED(5)
 
     def daemon(self):
 
@@ -59,8 +61,8 @@ class CameraNormalis(object):
         # Main endless loop
         while True:
 
-            # Switch down
-            if a == 1:
+            # Switch is DOWN
+            if GPIO.input(self.switch_down) == GPIO.HIGH:
 
                 if timer == 0:
                     timer = time.time()
@@ -78,23 +80,28 @@ class CameraNormalis(object):
 
                     # Blink the diode for another 10 secs slowly then turn it off (to make a statement)
                     self.red_diode.blink(on_time=1, off_time=1, n=10)
-                    self.shutdown()
+                    print('Executing SHUTDOWN')
+                    exit()
+                    # self.shutdown()
 
-            # Switch up
-            if a == 2:
+            # Switch is UP
+            if GPIO.input(self.switch_up) == GPIO.HIGH:
 
                 # Light the diode (stop blinking)
                 self.red_diode.on()
 
                 if self.state is None:
                     # Never started = run Camera Normalis
-                    self.run()
+                    print('Executing for the first time')
+                    # self.run()
                     self.state = True
                 elif 0 < timer < 3:
                     # Switch was flipped down for less than 3 seconds = run showtime
-                    self.run()
+                    print('Executing SHOWTIME')
+                    # self.run()
                 elif 3 < timer < 10:
                     # Switch was flipped down for more than 3 seconds and less than 10 seconds = run config
+                    print('Executing CONFIG')
                     self.run('config')
 
                 # Reset the timer
