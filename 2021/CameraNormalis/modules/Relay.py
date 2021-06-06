@@ -15,6 +15,9 @@ class FourPortRelay(object):
         self.pinout = pinout
         self.pins = list(self.pinout.values())
 
+        # TODO: what?
+        self.test = 'OK'
+
         GPIO.setup(self.pins, GPIO.OUT)
 
         self.state = {
