@@ -99,3 +99,6 @@ if __name__ == '__main__':
                              audio=Player(audio_folder, audio_format='mp3'),
                              display=LcdMini())
         app.relay.on(1)
+        app.relay.off(2)
+        app.relay.on(3)
+        app.relay.off(4)
