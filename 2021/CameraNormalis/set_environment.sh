@@ -17,6 +17,7 @@ sudo systemctl start pigpiod
 
 # SystemD
 sudo cp /home/pi/dvorky/2021/CameraNormalis/systemd/camera-daemonis.service /etc/systemd/system/camera-daemonis.service
+sudo cp /home/pi/dvorky/2021/CameraNormalis/systemd/camera-daemonis.service /etc/systemd/system/camera-daemonis.service
 sudo systemctl enable camera-daemonis.service
 
 sudo systemctl start camera-daemonis.service

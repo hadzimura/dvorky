@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 # coding=utf-8
 
-""" This is the main control daemon """
+""" The SystemD Daemon script """
 
 from gpiozero import LED
 from os.path import isfile
@@ -11,14 +11,20 @@ import signal
 import subprocess
 import sys
 import time
-import RPi.GPIO as GPIO # Import Raspberry Pi GPIO library
+import RPi.GPIO as GPIO
 
 
 class CameraNormalis(object):
 
-    def __init__(self, cn_file):
+    def __init__(self, cn_folder, cn_script):
+
+        cn_file = '{}/{}'.format(str(cn_folder), str(cn_script))
+        self.main_dir = cn_folder
 
         GPIO.setmode(GPIO.BOARD)
+
+        # Suppress warnings
+        GPIO.setwarnings(False)
 
         # LED diode
         self.red_diode = LED(5)
@@ -101,6 +107,12 @@ class CameraNormalis(object):
         if self.cn_pid is not None:
             kill(self.cn_pid, signal.SIGTERM)
 
+        # Try fetch the latest Git repository version before running again
+        try:
+            system('git -C {} pull'.format(self.main_dir))
+        except Exception:
+            pass
+
         # Run new instance in the desired mode (showtime|config)
         process = subprocess.Popen([sys.executable,
                                     self.cn_script, run_mode],
@@ -118,5 +130,5 @@ class CameraNormalis(object):
 
 
 if __name__ == '__main__':
-    app = CameraNormalis('/home/pi/dvorky/2021/CameraNormalis/camera_normalis.py')
+    app = CameraNormalis(cn_folder='/home/pi/dvorky', cn_script='2021/CameraNormalis/camera_normalis.py')
     app.daemon()

@@ -1,0 +1,5 @@
+[Path]
+PathModified=/home/pi/dvorky/2021/CameraNormalis/systemd
+
+[Install]
+WantedBy=multi-user.target

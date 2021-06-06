@@ -3,8 +3,9 @@ Description=Camera Daemonis
 After=network.target
 
 [Service]
+Type=simple
 ExecStart=/usr/bin/python -u camera_daemonis.py
-WorkingDirectory=/home/pi/dvorky/2021/CameraNormalis
+WorkingDirectory=/home/pi/dvorky/2021/CameraNormalis/systemd
 StandardOutput=inherit
 StandardError=inherit
 Restart=always
