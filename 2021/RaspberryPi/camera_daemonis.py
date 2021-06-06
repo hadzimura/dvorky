@@ -118,15 +118,15 @@ class CameraNormalis(object):
                                    stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE,
                                    shell=False)
-        out, err = process.communicate()
-        if out:
-            print("standard output of subprocess:")
-            print(out)
-        if err:
-            print("standard error of subprocess:")
-            print(err)
-        print("returncode of subprocess:")
-        print(process.returncode)
+        # out, err = process.communicate()
+        # if out:
+        #     print("standard output of subprocess:")
+        #     print(out)
+        # if err:
+        #     print("standard error of subprocess:")
+        #     print(err)
+        # print("returncode of subprocess:")
+        # print(process.returncode)
         # Store the current running instance PID
         print(process.pid)
         self.cn_pid = process.pid
