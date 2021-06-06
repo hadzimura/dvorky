@@ -26,6 +26,13 @@ class CameraNormalis(object):
         self.state = None
         self.cn_pid = None
 
+        GPIO.setmode(GPIO.BOARD)
+
+        self.red_diode = LED(5)
+        self.red_diode.blink(on_time=0.6, off_time=0.6)
+        exit()
+
+        GPIO.setup(10, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         # Switch UP
         # TODO
 
@@ -113,7 +120,7 @@ class CameraNormalis(object):
 
 
 if __name__ == '__main__':
-    app = CameraNormalis()
+    app = CameraNormalis('/home/pi/dvorky/2021/RaspberryPi/camera_normalis.py')
     app.daemon()
 
 # pi.write(5, True)
