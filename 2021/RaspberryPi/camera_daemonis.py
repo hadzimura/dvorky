@@ -103,7 +103,7 @@ class CameraNormalis(object):
                     time.sleep(3)
                     self.shutdown()
 
-    def run(self, run_mode=None):
+    def run(self, run_mode=''):
 
         """ Manage the running version of Camera Normalis """
 
