@@ -40,7 +40,7 @@ class FourPortRelay(object):
             time.sleep(delay_time)
 
             # Checking if the current relay is running and printing it
-            # TODO SOund the buzzer in case of a failed relay
+            # TODO Sound the buzzer in case of a failed relay
             if not GPIO.input(current_pin):
                 print('Relay {} on Pin {}: OK'.format(str(pin), current_pin))
             else:

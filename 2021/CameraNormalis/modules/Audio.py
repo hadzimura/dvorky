@@ -33,6 +33,10 @@ class Player(object):
                     self.Category[category][audio_name] = 1
                     self.count += 1
 
+    def self_test(self):
+        # filename: self_test.mp3
+        pass
+
     def playlist(self, category):
         """ Get one random """
         pass
