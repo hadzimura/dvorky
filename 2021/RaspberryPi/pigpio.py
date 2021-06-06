@@ -29,9 +29,9 @@ class CameraNormalis(object):
         # GPIO.setmode(GPIO.BOARD)
 
         self.red_diode = LED(5)
-        self.red_diode.blink(on_time=0.3, off_time=0.3, n=3)
+        self.red_diode.blink(on_time=0.25, off_time=0.25, n=12)
         time.sleep(3)
-        self.red_diode.blink(on_time=0.6, off_time=0.6, n=7)
+        self.red_diode.blink(on_time=0.5, off_time=0.5, n=14)
         time.sleep(7)
         exit()
 
