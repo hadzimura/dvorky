@@ -64,20 +64,21 @@ class CameraNormalis(object):
 
                 if self.state is None:
                     # Never started = run Camera Normalis
+                    timer = 0
                     print('Executing for the first time')
                     # self.run()
                     self.state = True
-                elif 0 < timer < 3:
+                    timer = 0
+                elif 0 < time.time() - timer < 3:
+                    timer = 0
                     # Switch was flipped down for less than 3 seconds = run showtime
                     print('Executing SHOWTIME')
                     # self.run()
-                elif 3 < timer < 10:
+                elif 3 < time.time() - timer < 10:
+                    timer = 0
                     # Switch was flipped down for more than 3 seconds and less than 10 seconds = run config
                     print('Executing CONFIG')
-                    self.run('config')
-
-                # Reset the timer
-                timer = 0
+                    # self.run('config')
 
             # Switch is DOWN
             if GPIO.input(self.switch_down) == GPIO.HIGH:
