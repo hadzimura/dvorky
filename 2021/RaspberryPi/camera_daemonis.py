@@ -120,6 +120,7 @@ class CameraNormalis(object):
                                    shell=False)
 
         # Store the current running instance PID
+        print(process.pid)
         self.cn_pid = process.pid
 
     @staticmethod
