@@ -4,6 +4,8 @@ sudo cp /home/pi/dvorky/2021/CameraNormalis/systemd/camera-daemonis.service /etc
 sudo cp /home/pi/dvorky/2021/CameraNormalis/systemd/cn-watcher.service /etc/systemd/system/cn-watcher.service
 sudo cp /home/pi/dvorky/2021/CameraNormalis/systemd/cn-watcher.path /etc/systemd/system/cn-watcher.path
 
+sudo systemctl daemon-reload
+
 sudo systemctl enable camera-daemonis.service
 sudo systemctl enable cn-watcher.service
 
