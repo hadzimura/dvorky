@@ -10,12 +10,14 @@ class AKAI_LPD8_MIDI(object):
 
         self.device_id = None
         self.test = 'Fail'
+        self.state = False
 
         if device_name is None:
             print('MIDI Controller Device Name not specified.')
         elif device_name in mido.get_input_names():
             self.device_id = device_name
             self.test = 'OK'
+            self.state = True
             print('Found MIDI Controller Device ID: {}'.format(self.device_id))
         else:
             for midi_device in mido.get_input_names():
@@ -23,6 +25,7 @@ class AKAI_LPD8_MIDI(object):
                     self.device_id = midi_device
                     print('Found MIDI Controller Device ID: {}'.format(self.device_id))
                     self.test = 'OK'
+                    self.state = True
                     break
             if self.device_id is None:
                 print('Not found any MIDI Controller Device Name as: {}'.format(device_name))

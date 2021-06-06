@@ -4,7 +4,7 @@ import time
 
 class FourPortRelay(object):
 
-    def __init__(self, pinout, self_test=True):
+    def __init__(self, pinout):
 
         # Setting a current GPIO mode
         GPIO.setmode(GPIO.BCM)
@@ -17,11 +17,6 @@ class FourPortRelay(object):
 
         GPIO.setup(self.pins, GPIO.OUT)
 
-        if self_test is True:
-            self.test = self.self_test()
-        else:
-            self.test = 'Skip'
-
         self.state = {
             1: None,
             2: None,
@@ -29,24 +24,25 @@ class FourPortRelay(object):
             4: None
         }
 
-    def self_test(self):
+    def self_test(self, delay_time=1):
 
         """ Test all the relays """
         relay_state = 'OK'
+
         for pin in self.pinout:
             current_pin = self.pinout[pin]
             GPIO.output(current_pin, GPIO.HIGH)
-            time.sleep(0.5)
+            time.sleep(delay_time)
             GPIO.output(current_pin, GPIO.LOW)
-            time.sleep(0.5)
+            time.sleep(delay_time)
 
             # Checking if the current relay is running and printing it
+            # TODO SOund the buzzer in case of a failed relay
             if not GPIO.input(current_pin):
                 print('Relay {} on Pin {}: OK'.format(str(pin), current_pin))
             else:
                 print('Relay {} on Pin {}: ERROR'.format(str(pin), current_pin))
                 relay_state = 'Fail'
-        return relay_state
 
     def on(self, relay_number):
         GPIO.output(self.pinout[relay_number], GPIO.HIGH)

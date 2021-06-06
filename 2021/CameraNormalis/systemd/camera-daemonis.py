@@ -76,7 +76,7 @@ class CameraNormalis(object):
                 elif 3 < time.time() - timer < 10:
                     # Switch was flipped down for more than 3 seconds and less than 10 seconds = run config
                     timer = 0
-                    self.run('config')
+                    self.run('tuneup')
 
             # Switch is DOWN
             if GPIO.input(self.switch_down) == GPIO.HIGH:
@@ -90,7 +90,7 @@ class CameraNormalis(object):
                 if 3 < time.time() - timer < 10 and mode_set == 'showtime':
                     # Diode blinked for 3 seconds – secondly blink it for 7 seconds slowly...
                     self.red_diode.blink(on_time=0.5, off_time=0.5, n=14)
-                    mode_set = 'config'
+                    mode_set = 'tuneup'
 
                 if time.time() - timer > 10:
                     # Initiate shutdown sequence
@@ -126,9 +126,10 @@ class CameraNormalis(object):
     @staticmethod
     def shutdown():
         """ Shutdown the Raspberry Pi """
-        system("sudo shutdown now -h")
+        # Rather nasty but then again: who cares a lot...?
+        system("echo sh4d0w | sudo shutdown now -h")
 
 
 if __name__ == '__main__':
-    app = CameraNormalis(cn_folder='/home/pi/dvorky', cn_script='2021/CameraNormalis/camera_normalis.py')
+    app = CameraNormalis(cn_folder='/home/pi/dvorky', cn_script='2021/CameraNormalis/camera-normalis.py')
     app.daemon()
