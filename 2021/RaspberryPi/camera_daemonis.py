@@ -66,19 +66,19 @@ class CameraNormalis(object):
                     # Never started = run Camera Normalis
                     timer = 0
                     print('Executing for the first time')
-                    # self.run()
+                    self.run()
                     self.state = True
                     timer = 0
                 elif 0 < time.time() - timer < 3:
                     timer = 0
                     # Switch was flipped down for less than 3 seconds = run showtime
                     print('Executing SHOWTIME')
-                    # self.run()
+                    self.run()
                 elif 3 < time.time() - timer < 10:
                     timer = 0
                     # Switch was flipped down for more than 3 seconds and less than 10 seconds = run config
                     print('Executing CONFIG')
-                    # self.run('config')
+                    self.run('config')
 
             # Switch is DOWN
             if GPIO.input(self.switch_down) == GPIO.HIGH:
@@ -98,10 +98,10 @@ class CameraNormalis(object):
                     # Initiate shutdown sequence
 
                     # Blink the diode for another 10 secs slowly then turn it off (to make a statement)
-                    self.red_diode.blink(on_time=1, off_time=1, n=10)
+                    self.red_diode.blink(on_time=0.1, off_time=0.1, n=30)
                     print('Executing SHUTDOWN')
-                    exit()
-                    # self.shutdown()
+                    time.sleep(3)
+                    self.shutdown()
 
     def run(self, run_mode=None):
 
@@ -122,18 +122,11 @@ class CameraNormalis(object):
         self.cn_pid = process.pid
 
     @staticmethod
-    def shutdown(self):
-
+    def shutdown():
         """ Shutdown the Raspberry Pi """
-
         system("shutdown now -h")
 
 
 if __name__ == '__main__':
     app = CameraNormalis('/home/pi/dvorky/2021/RaspberryPi/camera_normalis.py')
     app.daemon()
-
-# pi.write(5, True)
-# time.sleep(0.5)
-# pi.write(5, False)
-# time.sleep(0.5)

@@ -10,7 +10,7 @@ import sys
 import time
 import traceback
 
-import pigpio
+import camera_daemonis
 from nrf24 import *
 
 #
@@ -30,7 +30,7 @@ if __name__ == "__main__":
 
     # Connect to pigpiod
     print(f'Connecting to GPIO daemon on {hostname}:{port} ...')
-    pi = pigpio.pi(hostname, port)
+    pi = camera_daemonis.pi(hostname, port)
     if not pi.connected:
         print("Not connected to Raspberry Pi ... goodbye.")
         sys.exit()
