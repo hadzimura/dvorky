@@ -56,7 +56,8 @@ class CameraNormalis(object):
             # Switch is UP
             if GPIO.input(self.switch_up) == GPIO.HIGH:
 
-                print('timer: {}'.format(str(timer)))
+                if timer > 0:
+                    print('timer: {}'.format(str(timer)))
 
                 # Light the diode (stop blinking)
                 self.red_diode.on()
