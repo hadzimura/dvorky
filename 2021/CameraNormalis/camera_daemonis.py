@@ -114,7 +114,7 @@ class CameraNormalis(object):
     @staticmethod
     def shutdown():
         """ Shutdown the Raspberry Pi """
-        system("shutdown now -h")
+        system("sudo shutdown now -h")
 
 
 if __name__ == '__main__':
