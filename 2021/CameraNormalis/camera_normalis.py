@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 # coding=utf-8
 
-from Audio import Player
-from Controller import AKAI_LPD8_MIDI
-from Display import LcdMini
-from Relay import FourPortRelay
+from modules.Audio import Player
+from modules.Controller import AKAI_LPD8_MIDI
+from modules.Display import LcdMini
+from modules.Relay import FourPortRelay
 
 import argparse
 import mido
