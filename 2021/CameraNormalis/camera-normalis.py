@@ -22,7 +22,7 @@ class CameraNormalis(object):
         self.runtime_mode = runtime_mode
 
         # Init Audio Player
-        self.audio = Player(audio_path=cn_config['audio_path'], audio_format=cn_config['audio_format'])
+        self.audio = Player(audio_path=cn_config['audio_files'], audio_format=cn_config['audio_format'])
 
         # Init LCD Display
         self.lcd = LcdMini()
