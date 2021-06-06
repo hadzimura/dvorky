@@ -43,13 +43,6 @@ class CameraNormalis(object):
         GPIO.setup(self.switch_up, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
         GPIO.setup(self.switch_down, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
-
-        while True:
-
-                print("Switch UP")
-
-                print("Switch DOWN")
-
     def daemon(self):
 
         """ Run this in the background """
