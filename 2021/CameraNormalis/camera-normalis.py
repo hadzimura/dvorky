@@ -24,8 +24,14 @@ class CameraNormalis(object):
         # Init Audio Player
         self.audio = Player(audio_path=cn_config['audio_files'], audio_format=cn_config['audio_format'])
 
-        # Init LCD Display
-        self.lcd = LcdMini()
+        # MacOS specific exception (do not init HW modules)
+        if self.runtime_mode != 'macos':
+
+            # Init LCD Display
+            self.lcd = LcdMini()
+
+            # Init 4 Port Relay
+            self.relay = FourPortRelay(cn_config['relays'])
 
         # Runtime mode specific initializations
         if self.runtime_mode == 'tuneup':
@@ -33,22 +39,15 @@ class CameraNormalis(object):
             # Init MIDI Controller
             self.controller = AKAI_LPD8_MIDI(device_name=cn_config['midi_device'])
 
-            # Init Relays with initial self-test enabled
-            self.relay = FourPortRelay(cn_config['relays'])
-
-        elif self.runtime_mode == 'showtime':
-
-            # Init Relays without initial self-test enabled
-            self.relay = FourPortRelay(cn_config['relays'], self_test=False)
-
-        # Display Welcome Message
-        if self.lcd.state is True:
-            self.lcd.clear()
-            self.lcd.create('CAMERA NORMALIS\nControl... {}\nRelays.... {}\nAudio.... {}'.format(
-                str(self.controller.test), str(self.relay.test), str(self.audio.count)))
-        else:
-            # LCD init failed, who cares?
-            pass
+        # All set, display LCD Welcome Message
+        if self.runtime_mode != 'macos':
+            if self.lcd.state is True:
+                self.lcd.clear()
+                self.lcd.create('CAMERA NORMALIS\nControl... {}\nRelays.... {}\nAudio.... {}'.format(
+                    str(self.controller.test), str(self.relay.test), str(self.audio.count)))
+            else:
+                # LCD init failed, who cares?
+                pass
 
     def run(self):
         """ Execute the Main Camera Normalis Loop based on the selected runtime mode """
@@ -57,6 +56,9 @@ class CameraNormalis(object):
         elif self.runtime_mode == 'tuneup':
             self.configuration()
             # TODO: What next?
+        elif self.runtime_mode == 'macos':
+            self.audio.list()
+            self.audio.self_test()
 
     def configuration(self):
         """ Test various functionalities and allow user to change configuration parameters(?) """
@@ -68,7 +70,6 @@ class CameraNormalis(object):
             self.relay.self_test(delay_time=1)
 
             # Test audio player
-            # TODO
             # self.audio.self_test()
 
             return None
@@ -115,6 +116,11 @@ if __name__ == '__main__':
                         type=str,
                         default='camera-normalis.json',
                         dest='cn_config_file')
+    parser.add_argument("-m",
+                        "--macos",
+                        help="On MacOSX there is no GPIO... :)",
+                        default=False,
+                        action="store_true")
     parser.add_argument("-s",
                         "--showtime",
                         help="Run Camera Normalis in the showtime mode.",
@@ -133,7 +139,9 @@ if __name__ == '__main__':
         cn_configuration = load(configuration_file)
 
     set_mode = None
-    if args.showtime is True:
+    if args.macos is True:
+        set_mode = 'macos'
+    elif args.showtime is True:
         set_mode = 'showtime'
     elif args.tuneup is True:
         set_mode = 'tuneup'

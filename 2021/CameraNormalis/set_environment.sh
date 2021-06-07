@@ -14,3 +14,6 @@ sudo systemctl start pigpiod
 # 1) Run alsamixer from console
 # 2) Press F6 and select the "bcm2835 Headphones"
 # 3) Press UP to increase the volume level
+
+# WiFi:
+# 10.10.20.58
