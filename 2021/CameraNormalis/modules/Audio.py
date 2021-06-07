@@ -36,6 +36,31 @@ class Player(object):
                     self.Category[category][audio_name] = 1
                     self.count += 1
 
+    def get_random(self, category):
+        r = randrange(0, len(self.Category[category]), 1)
+        return self.Category[category][r]
+
+    def showtime(self):
+
+        while True:
+
+            current_file = self.get_random('ambient')
+            pygame.mixer.music.load('{}/{}'.format(self.audio_path, current_file))
+            pygame.mixer.music.play()
+            timer = 0
+            current_volume = 0.5
+
+            while pygame.mixer.music.get_busy():
+
+                if timer == 0:
+                    timer = time.time()
+
+                if time.time() - timer > 5:
+                    # After 5 seconds
+                    current_volume = self.random_change(current_volume)
+                    self.volume(current_volume)
+                    timer = 0
+
     def self_test(self):
         # pygame.mixer.music.load('{}/self_test.mp3'.format(self.audio_path))
         pygame.mixer.music.load('{}/ambient-full-MP3.mp3'.format(self.audio_path))

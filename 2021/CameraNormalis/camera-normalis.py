@@ -52,7 +52,7 @@ class CameraNormalis(object):
     def run(self):
         """ Execute the Main Camera Normalis Loop based on the selected runtime mode """
         if self.runtime_mode == 'showtime':
-            pass
+            self.audio.showtime()
         elif self.runtime_mode == 'tuneup':
             self.audio.self_test()
             exit()

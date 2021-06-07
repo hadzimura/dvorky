@@ -1,5 +1,6 @@
 .idea
 venv
+2021/CameraNormalis/RPi/*
 
 # Prerequisites
 *.d
