@@ -2,6 +2,7 @@
 # coding=utf-8
 
 import RPi.GPIO as GPIO
+from random import randrange
 import time
 
 
@@ -24,10 +25,10 @@ class FourPortRelay(object):
         GPIO.setup(self.pins, GPIO.OUT)
 
         self.state = {
-            1: None,
-            2: None,
-            3: None,
-            4: None
+            1: self.off(1),
+            2: self.off(2),
+            3: self.off(3),
+            4: self.off(4)
         }
 
     def self_test(self, delay_time=1):
@@ -57,6 +58,20 @@ class FourPortRelay(object):
     def off(self, relay_number):
         GPIO.output(self.pinout[relay_number], GPIO.LOW)
         self.state[relay_number] = False
+
+    def crowd_control(self, total_time=4):
+        """ Shut the relays randomly over fixed timespan (should be 4 seconds) """
+        wait_time = total_time / len(self.state)
+        all_clear = False
+
+        while all_clear is False:
+            test_state = randrange(1, 4, 1)
+            if self.state[test_state] is True:
+                self.off(test_state)
+                time.sleep(wait_time)
+         return None
+
+
 
     @staticmethod
     def shutdown(self):

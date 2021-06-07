@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 # coding=utf-8
+import time
 
 from modules.Audio import Player
 from modules.Controller import AKAI_LPD8_MIDI
@@ -9,6 +10,7 @@ from modules.Relay import FourPortRelay
 import argparse
 from json import load
 import mido
+from random import randrange
 
 
 class CameraNormalis(object):
@@ -16,8 +18,8 @@ class CameraNormalis(object):
     # def __init__(self, playtime=10, midi=None, relay=None, audio=None, display=None):
     def __init__(self, cn_config, runtime_mode):
 
-        # Set the exhibition cycle time (minutes)
-        self.playtime = cn_config['playtime']
+        # Set the exhibition cycle time (recalculate minutes to secs first)
+        self.playtime = cn_config['playtime'] * 60
 
         self.runtime_mode = runtime_mode
 
@@ -55,7 +57,30 @@ class CameraNormalis(object):
     def run(self):
         """ Execute the Main Camera Normalis Loop based on the selected runtime mode """
         if self.runtime_mode == 'showtime':
-            self.audio.showtime()
+
+            # True Showtime Main Endless Loop is here
+            while True:
+
+                # Play the crowds (custom samples handled inside the class)
+                self.audio.partytime(self.playtime)
+
+                # Play the speech announcement
+                self.audio.play_track(self.audio.get_track('announce'))
+
+                # ...and shut the Arduino crowd
+                self.relay.crowd_control(total_time=4)
+
+                # Crowd was hushed: play the speech
+                self.audio.play_track(self.audio.get_track('speech'))
+
+                # Wait for it to end...
+                self.audio.wait_for_end_of_track()
+
+                # Moment for the inner peace
+                time.sleep(3)
+
+                # ...rinse and repeat :)
+
         elif self.runtime_mode == 'tuneup':
             self.audio.self_test()
             exit()
@@ -159,25 +184,3 @@ if __name__ == '__main__':
 
     # Run specified mode
     app.run()
-
-    # if args.config is True:
-    #     # Run in the CONFIG mode
-    #     app = CameraNormalis(playtime=None,
-    #                          midi=AKAI_LPD8_MIDI(device_name='LPD8'),
-    #                          relay=FourPortRelay(relay_pinout, self_test=True),
-    #                          audio=Player(audio_folder, audio_format='mp3'),
-    #                          display=LcdMini())
-    #     app.test_midi()
-    # elif args.showtime is True:
-    #     # Run in the SHOWTIME mode
-    #     app = CameraNormalis(playtime=playtime,
-    #                          midi=AKAI_LPD8_MIDI(device_name='LPD8'),
-    #                          relay=FourPortRelay(relay_pinout, self_test=False),
-    #                          audio=Player(audio_folder, audio_format='mp3'),
-    #                          display=LcdMini())
-    #     app.relay.on(1)
-    #     app.relay.off(2)
-    #     app.relay.on(3)
-    #     app.relay.off(4)
-    #     while True:
-    #         pass
