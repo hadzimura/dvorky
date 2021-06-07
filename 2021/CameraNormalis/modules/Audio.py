@@ -57,7 +57,7 @@ class Player(object):
         # filename: self_test.mp3
 
     @staticmethod
-    def random_change(self, from_volume):
+    def random_change(from_volume):
 
             next_volume = 0
 
