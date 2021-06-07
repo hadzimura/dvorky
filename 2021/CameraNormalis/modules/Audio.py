@@ -30,7 +30,7 @@ class Player(object):
         for audio_file in audio_files:
             # a = pygame.mixer.Sound(audio_file)
             # audio_length = pygame.mixer.Sound.get_length(a)
-            audio_name = audio_file.split('/')[-1].split('.')[0]
+            audio_name = audio_file.split('/')[-1]
             for category in self.Category:
                 if category in audio_name:
                     self.Category[category].append(audio_name)
