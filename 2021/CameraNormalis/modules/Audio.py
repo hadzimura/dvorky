@@ -10,9 +10,9 @@ import time
 class Player(object):
 
     Category = {
-        'ambient': dict(),
-        'intro': dict(),
-        'scene': dict()
+        'ambient': list(),
+        'intro': list(),
+        'scene': list()
     }
 
     def __init__(self, audio_path=None, audio_format='wav'):
@@ -33,7 +33,7 @@ class Player(object):
             audio_name = audio_file.split('/')[-1].split('.')[0]
             for category in self.Category:
                 if category in audio_name:
-                    self.Category[category][audio_name] = 1
+                    self.Category[category].append(audio_name)
                     self.count += 1
 
     def get_random(self, category):
