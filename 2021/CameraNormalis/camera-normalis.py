@@ -41,12 +41,15 @@ class CameraNormalis(object):
 
         # All set, display LCD Welcome Message
         if self.runtime_mode != 'macos':
-            if self.lcd.state is True:
-                self.lcd.clear()
-                self.lcd.create('CAMERA NORMALIS\nControl... {}\nRelays.... {}\nAudio.... {}'.format(
-                    str(self.controller.test), str(self.relay.test), str(self.audio.count)))
-            else:
-                # LCD init failed, who cares?
+            try:
+                if self.lcd.state is True:
+                    self.lcd.clear()
+                    self.lcd.create('CAMERA NORMALIS\nControl... {}\nRelays.... {}\nAudio.... {}'.format(
+                        str(self.controller.test), str(self.relay.test), str(self.audio.count)))
+                else:
+                    # LCD init failed, who cares?
+                    pass
+            except Exception:
                 pass
 
     def run(self):
