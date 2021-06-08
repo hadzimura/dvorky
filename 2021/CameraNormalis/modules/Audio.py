@@ -61,7 +61,7 @@ class Player(object):
         timer = time.time()
 
         # Set starting volume to default Player value
-        current_volume = self.default_volume
+        current_volume = self.current_volume
 
         # Loop while the track is playing
         while pygame.mixer.music.get_busy():
