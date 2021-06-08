@@ -1,8 +1,16 @@
 {
-  "audio_files": "/home/pi/dvorky/2021/audio_files",
-  "audio_format": "mp3",
+  "audio": {
+    "format": "mp3",
+    "path": "/home/pi/dvorky/2021/audio_files"
+  },
   "midi_device": "LPD8",
-  "playtime": 5,
+  "showtime": {
+    "crowd_control_fadeout": 5,
+    "end_silence": 5,
+    "scene_probability": 4,
+    "total_time": 5,
+    "volume_change_period": 15
+  },
   "relays": {
     "1": 14,
     "2": 15,

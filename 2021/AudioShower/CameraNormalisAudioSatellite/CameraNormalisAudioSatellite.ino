@@ -2,20 +2,23 @@
  Camera Normalis – Arduino Audio Satellite
  ****************************************************/
 
-#include "Arduino.h"
-#include "SoftwareSerial.h"
-#include "DFRobotDFPlayerMini.h"
+// #include "Arduino.h"
+// #include "SoftwareSerial.h"
+#include "Serial.h"
+#include "DFPlayerMini.h"
 
 // Initialize the driver, passing the busy-wait method
 DFPlayerMini SatellitePlayer;
+long randNumber;
 
-
-void printDetail(uint8_t type, int value);
 
 void setup()
 {
-  mySoftwareSerial.begin(9600);
+  // mySoftwareSerial.begin(9600);
   Serial.begin(115200);
+
+  // Init the Random Seeder
+  randomSeed(analogRead(0));
   
   Serial.println();
   Serial.println(F("Camera Normalis Audio Satellite"));
@@ -27,6 +30,8 @@ void setup()
   // Ambient Tracks: 10-x
   static unsigned integer AmbientTracksStart = 10;
   static unsigned integer AmbientTracksStop = 20;
+  static unsigned integer VolumeChangeMs = 3000;
+
 
   // Scene Tracks: 50-x
   static unsigned integer SceneTracksStart = 50;
@@ -65,6 +70,18 @@ void loop()
 
 // Modify track volume using Fake Dice
 void modifyVolume() {
+
+// Set the Timer for a change of the volume    
+static unsigned long timer = millis();
+
+// Timer for the Volume change reached?
+if (millis() - timer > VolumeChangeMs) {
+    timer = millis();
+
+    // Change the volume to a new 
+    SatellitePlayer.setVolume();
+  }
+  
   
   
 }

@@ -18,13 +18,18 @@ class CameraNormalis(object):
     # def __init__(self, playtime=10, midi=None, relay=None, audio=None, display=None):
     def __init__(self, cn_config, runtime_mode):
 
+        self.cfg = cn_config
+        self.cfg_show = cn_config['showtime']
+        self.cfg_audio = cn_config['audio']
+
         # Set the exhibition cycle time (recalculate minutes to secs first)
-        self.playtime = cn_config['playtime'] * 60
+        self.total_time = self.cfg_show['total_time'] * 60
 
         self.runtime_mode = runtime_mode
 
         # Init Audio Player
-        self.audio = Player(audio_path=cn_config['audio_files'], audio_format=cn_config['audio_format'])
+        self.audio = Player(audio_path=self.cfg_audio['path'],
+                            audio_format=self.cfg_audio['format'])
 
         # MacOS specific exception (do not init HW modules)
         if self.runtime_mode != 'macos':
@@ -33,13 +38,13 @@ class CameraNormalis(object):
             self.lcd = LcdMini()
 
             # Init 4 Port Relay
-            self.relay = FourPortRelay(cn_config['relays'])
+            self.relay = FourPortRelay(self.cfg['relays'])
 
         # Runtime mode specific initializations
         if self.runtime_mode == 'tuneup':
 
             # Init MIDI Controller
-            self.controller = AKAI_LPD8_MIDI(device_name=cn_config['midi_device'])
+            self.controller = AKAI_LPD8_MIDI(device_name=self.cfg['midi_device'])
 
         # All set, display LCD Welcome Message
         if self.runtime_mode != 'macos':
@@ -62,26 +67,24 @@ class CameraNormalis(object):
             while True:
 
                 # Play the crowds (custom samples handled inside the class)
-                self.audio.partytime(self.playtime)
+                self.audio.partytime(self.total_time,
+                                     scene_probability=self.cfg_show['scene_probability'],
+                                     volume_change_period=self.cfg_show['volume_change_period'])
 
                 # Play the speech announcement
-                # self.audio.play_track(self.audio.get_track('announcement'))
                 self.audio.announce()
 
-                # ...and shut the Arduino crowd
-                # self.relay.crowd_control(total_time=4)
+                # TODO: ...and shut the Arduino crowd
+                # self.relay.crowd_control(total_time=self.cfg_show['crowd_control_fadeout'])
 
                 # Crowd was hushed: play the speech
                 self.audio.speech()
-                # self.audio.play_track(self.audio.get_track('speech'))
-                # self.audio.wait_for_end_of_track()
 
-                # Play the speech announcement
-                # self.audio.play_track(self.audio.get_track('clap_your_hands'))
-                # self.audio.wait_for_end_of_track()
+                # Play the Clap Your Hands outro
+                self.audio.clap_your_hands()
 
                 # Moment for the inner peace
-                time.sleep(3)
+                time.sleep(self.cfg_show['end_silence'])
 
                 # ...rinse and repeat :)
 
@@ -94,7 +97,7 @@ class CameraNormalis(object):
             while True:
 
                 # Play the crowds (custom samples handled inside the class)
-                self.audio.partytime(self.playtime)
+                self.audio.partytime(self.total_time)
 
                 # Play the speech announcement
                 # self.audio.play_track(self.audio.get_track('announce'))

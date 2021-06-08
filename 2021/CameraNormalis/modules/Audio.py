@@ -13,6 +13,7 @@ class Player(object):
         'ambient': list(),
         'announcement': list(),
         'speech': list(),
+        'clap_your_hands': list(),
         'scene': list()
     }
 
@@ -22,6 +23,7 @@ class Player(object):
         self.default_volume = 0.5
         self.current_volume = 0.5
         self.speech_volume = 1
+        self.scene_volume = 0.7
 
         # Start the Mixer
         pygame.mixer.init(48000, -16, 1, 1024)
@@ -58,7 +60,7 @@ class Player(object):
 
         return None
 
-    def partytime(self, show_lenght, scene_probability=4):
+    def partytime(self, show_lenght, scene_probability=4, volume_change_period=15):
 
         """ Play ambient tracks for the specified length """
 
@@ -72,14 +74,14 @@ class Player(object):
             self.play_track(self.get_track('ambient'), set_volume=self.current_volume)
 
             # Tweak the track volume during playtime
-            self.animate_track(change_period=15)
+            self.animate_track(change_period=volume_change_period)
 
             # Window of the opportunity for scenic sample (1/5)
             if len(self.Category['scene']) > 0:
                 # Test if 'scene' should be played
                 if randrange(1, 5, 1) > scene_probability:
                     # Play random scenic sample
-                    self.play_track(self.get_track('scene'), set_volume=self.default_volume)
+                    self.play_track(self.get_track('scene'), set_volume=self.scene_volume)
                     self.wait_for_end_of_track()
 
         return None
@@ -112,6 +114,11 @@ class Player(object):
 
     def announce(self):
         self.play_track(self.get_track('announcement'), set_volume=self.speech_volume)
+        self.wait_for_end_of_track()
+        return None
+
+    def clap_your_hands(self):
+        self.play_track(self.get_track('clap_your_hands'), set_volume=self.speech_volume)
         self.wait_for_end_of_track()
         return None
 
