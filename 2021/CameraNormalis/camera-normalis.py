@@ -65,10 +65,10 @@ class CameraNormalis(object):
                 self.audio.partytime(self.playtime)
 
                 # Play the speech announcement
-                self.audio.play_track(self.audio.get_track('announce'))
+                # self.audio.play_track(self.audio.get_track('announce'))
 
                 # ...and shut the Arduino crowd
-                self.relay.crowd_control(total_time=4)
+                # self.relay.crowd_control(total_time=4)
 
                 # Crowd was hushed: play the speech
                 self.audio.play_track(self.audio.get_track('speech'))

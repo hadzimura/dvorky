@@ -2,7 +2,7 @@
   "audio_files": "../audio_files",
   "audio_format": "mp3",
   "midi_device": "LPD8",
-  "playtime": 10,
+  "playtime": 5,
   "relays": {
     "1": 14,
     "2": 15,

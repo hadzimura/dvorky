@@ -210,7 +210,6 @@ class Player(object):
 
         # print('===')
 
-
     @staticmethod
     def wait_for_end_of_track():
         """ Only wait for track to end and simply return control afterwards """
