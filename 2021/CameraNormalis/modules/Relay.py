@@ -69,9 +69,7 @@ class FourPortRelay(object):
             if self.state[test_state] is True:
                 self.off(test_state)
                 time.sleep(wait_time)
-         return None
-
-
+        return None
 
     @staticmethod
     def shutdown(self):
