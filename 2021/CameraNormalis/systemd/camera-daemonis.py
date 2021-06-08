@@ -115,7 +115,7 @@ class CameraNormalis(object):
 
         # Run new instance in the desired mode (showtime|config)
         process = subprocess.Popen([sys.executable,
-                                    self.cn_script, run_mode],
+                                    self.cn_script, '--{}'.format(run_mode)],
                                    stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE,
                                    shell=False)
