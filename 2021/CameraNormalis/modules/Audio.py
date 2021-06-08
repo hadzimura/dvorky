@@ -11,6 +11,7 @@ class Player(object):
 
     Category = {
         'ambient': list(),
+        'announcement': list(),
         'speech': list(),
         'scene': list()
     }
