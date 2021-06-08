@@ -1,5 +1,5 @@
 {
-  "audio_files": "/home/pi/dvorky/2021/CameraNormalis/audio_files",
+  "audio_files": "/home/pi/dvorky/2021/audio_files",
   "audio_format": "mp3",
   "midi_device": "LPD8",
   "playtime": 5,
