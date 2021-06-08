@@ -24,12 +24,12 @@ class FourPortRelay(object):
 
         GPIO.setup(self.pins, GPIO.OUT)
 
-        self.state = {
-            1: self.off(1),
-            2: self.off(2),
-            3: self.off(3),
-            4: self.off(4)
-        }
+        # self.state = {
+        #     1: self.off(1),
+        #     2: self.off(2),
+        #     3: self.off(3),
+        #     4: self.off(4)
+        # }
 
     def self_test(self, delay_time=1):
 
