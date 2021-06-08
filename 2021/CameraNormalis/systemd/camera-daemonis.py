@@ -67,16 +67,16 @@ class CameraNormalis(object):
                 if self.state is None:
                     # Never started = run Camera Normalis
                     timer = 0
-                    self.run('showtime')
+                    self.run('s')
                     self.state = True
                 elif 0 < time.time() - timer < 3:
                     # Switch was flipped down for less than 3 seconds = run showtime
                     timer = 0
-                    self.run('showtime')
+                    self.run('s')
                 elif 3 < time.time() - timer < 10:
                     # Switch was flipped down for more than 3 seconds and less than 10 seconds = run config
                     timer = 0
-                    self.run('tuneup')
+                    self.run('t')
 
             # Switch is DOWN
             if GPIO.input(self.switch_down) == GPIO.HIGH:
@@ -115,10 +115,15 @@ class CameraNormalis(object):
 
         # Run new instance in the desired mode (showtime|config)
         process = subprocess.Popen([sys.executable,
-                                    self.cn_script, '--{}'.format(run_mode)],
+                                    self.cn_script, '-{}'.format(run_mode)],
                                    stdout=subprocess.PIPE,
                                    stderr=subprocess.PIPE,
                                    shell=False)
+        out, err = process.communicate()
+        if out:
+            print('OUTPUT: {}'.format(str(out)))
+        if err:
+            print('ERROR: {}'.format(str(err)))
 
         # Get the PID of current instance to be able to kill it during next change
         self.cn_pid = process.pid
