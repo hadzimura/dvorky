@@ -183,8 +183,10 @@ if __name__ == '__main__':
 
     args = parser.parse_args()
 
+    cn_path = '/home/pi/dvorky/2021/CameraNormalis'
+
     # Load configuration file
-    with open(args.cn_config_file) as configuration_file:
+    with open('{}/{}'.format(cn_path, args.cn_config_file)) as configuration_file:
         cn_configuration = load(configuration_file)
 
     set_mode = None
