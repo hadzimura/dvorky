@@ -87,9 +87,28 @@ class CameraNormalis(object):
             self.configuration()
             # TODO: What next?
         elif self.runtime_mode == 'macos':
-            self.audio.list()
-            self.audio.self_test()
+            # True Showtime Main Endless Loop is here
+            while True:
 
+                # Play the crowds (custom samples handled inside the class)
+                self.audio.partytime(self.playtime)
+
+                # Play the speech announcement
+                self.audio.play_track(self.audio.get_track('announce'))
+
+                # ...and shut the Arduino crowd
+                self.relay.crowd_control(total_time=4)
+
+                # Crowd was hushed: play the speech
+                self.audio.play_track(self.audio.get_track('speech'))
+
+                # Wait for it to end...
+                self.audio.wait_for_end_of_track()
+
+                # Moment for the inner peace
+                time.sleep(3)
+
+                # ...rinse and repeat :)
     def configuration(self):
         """ Test various functionalities and allow user to change configuration parameters(?) """
 
