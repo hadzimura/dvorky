@@ -37,8 +37,8 @@ class Player(object):
 
     def get_track(self, category):
         # NOTE: There must be at least 2 tracks in the category
-        random_song = randrange(0, len(self.Category[category]), 1)
-        return self.Category[category][random_song]
+        random_track = randrange(0, len(self.Category[category]), 1)
+        return self.Category[category][random_track]
 
     def play_track(self, track_name, set_volume=None):
         """ Start track playback in the background and return control back to Player """
