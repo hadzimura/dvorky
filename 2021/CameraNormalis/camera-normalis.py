@@ -62,7 +62,7 @@ class CameraNormalis(object):
             while True:
 
                 # Play the crowds (custom samples handled inside the class)
-                # self.audio.partytime(self.playtime)
+                self.audio.partytime(self.playtime)
 
                 # Play the speech announcement
                 # self.audio.play_track(self.audio.get_track('announcement'))
