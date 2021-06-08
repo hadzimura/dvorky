@@ -107,7 +107,7 @@ class Player(object):
         return None
 
     def announce(self):
-        self.play_track(self.get_track('announce'), set_volume=self.speech_volume)
+        self.play_track(self.get_track('announcement'), set_volume=self.speech_volume)
         self.wait_for_end_of_track()
         return None
 
