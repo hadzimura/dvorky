@@ -43,7 +43,7 @@ class LcdMini(object):
 
             # Set font (http://www.dafont.com/bitmap.php)
             # self.font = ImageFont.load_default()
-            self.font = ImageFont.truetype('fonts/RetroGaming.ttf', 11)
+            self.font = ImageFont.truetype('/home/pi/dvorky/2021/CameraNormalis/fonts/RetroGaming.ttf', 11)
             self.state = True
 
         except RuntimeError as error:
