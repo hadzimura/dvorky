@@ -72,9 +72,11 @@ class CameraNormalis(object):
 
                 # Crowd was hushed: play the speech
                 self.audio.play_track(self.audio.get_track('speech'))
-
-                # Wait for it to end...
                 self.audio.wait_for_end_of_track()
+
+                # Play the speech announcement
+                # self.audio.play_track(self.audio.get_track('clap_your_hands'))
+                # self.audio.wait_for_end_of_track()
 
                 # Moment for the inner peace
                 time.sleep(3)
