@@ -62,17 +62,19 @@ class CameraNormalis(object):
             while True:
 
                 # Play the crowds (custom samples handled inside the class)
-                self.audio.partytime(self.playtime)
+                # self.audio.partytime(self.playtime)
 
                 # Play the speech announcement
-                self.audio.play_track(self.audio.get_track('announcement'))
+                # self.audio.play_track(self.audio.get_track('announcement'))
+                self.audio.announce()
 
                 # ...and shut the Arduino crowd
                 # self.relay.crowd_control(total_time=4)
 
                 # Crowd was hushed: play the speech
-                self.audio.play_track(self.audio.get_track('speech'))
-                self.audio.wait_for_end_of_track()
+                self.audio.speech()
+                # self.audio.play_track(self.audio.get_track('speech'))
+                # self.audio.wait_for_end_of_track()
 
                 # Play the speech announcement
                 # self.audio.play_track(self.audio.get_track('clap_your_hands'))
