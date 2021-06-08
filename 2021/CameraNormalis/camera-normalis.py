@@ -87,7 +87,6 @@ class CameraNormalis(object):
 
         elif self.runtime_mode == 'tuneup':
             self.audio.self_test()
-            exit()
             self.configuration()
             # TODO: What next?
         elif self.runtime_mode == 'macos':

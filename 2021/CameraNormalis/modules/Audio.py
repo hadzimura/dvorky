@@ -96,7 +96,6 @@ class Player(object):
             # When the timer expire, roll the Fake Dice and tweak the volume
             if time.time() - timer > change_period:
 
-                # print('Changing')
                 new_volume = self.roll_fake_dice()
                 self.volume(new_volume)
                 self.current_volume = new_volume
