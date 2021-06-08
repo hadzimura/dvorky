@@ -123,7 +123,8 @@ class CameraNormalis(object):
         if out:
             print('OUTPUT: {}'.format(str(out)))
         if err:
-            print('ERROR: {}'.format(str(err)))
+            with open('error.log', 'a+') as errorlog_file:
+                errorlog_file.write(str(err))
 
         # Get the PID of current instance to be able to kill it during next change
         self.cn_pid = process.pid
