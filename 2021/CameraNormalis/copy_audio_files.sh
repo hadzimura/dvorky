@@ -30,4 +30,5 @@ for AMBIENT_FILE in "${AMBIENT_FILES[@]}"
 	  TRACK_NAME=$((TRACK_NAME + 1))
   done
 
+umount "${DESTINATION_DIR}"
 

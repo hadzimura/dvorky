@@ -89,8 +89,9 @@ class CameraNormalis(object):
                 # ...rinse and repeat :)
 
         elif self.runtime_mode == 'tuneup':
-            self.audio.self_test()
-            self.configuration()
+            while True:
+                self.audio.speech()
+
             # TODO: What next?
         elif self.runtime_mode == 'macos':
             # True Showtime Main Endless Loop is here
