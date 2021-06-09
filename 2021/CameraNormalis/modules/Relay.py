@@ -24,6 +24,7 @@ class SinglePortRelay(object):
 
         GPIO.setup(self.pin, GPIO.OUT)
 
+        print('aaa')
         GPIO.output(self.pin, GPIO.HIGH)
         time.sleep(1)
         GPIO.output(self.pin, GPIO.LOW)
