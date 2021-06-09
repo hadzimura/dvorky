@@ -38,7 +38,7 @@ class CameraNormalis(object):
             # self.lcd = LcdMini()
 
             # Init 4 Port Relay
-            self.relay = FourPortRelay(self.cfg['relays'])
+            # self.relay = FourPortRelay(self.cfg['relays'])
             print('to relay')
             self.player_switch = SinglePortRelay()
 
