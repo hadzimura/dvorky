@@ -74,10 +74,10 @@ class FourPortRelay(object):
         self.on(2)
         time.sleep(2)
         self.on(3)
-        time.sleep(1)
+        time.sleep(2)
         self.off(3)
         self.on(4)
-        time.sleep(1)
+        time.sleep(2)
         self.off(4)
         return None
 
