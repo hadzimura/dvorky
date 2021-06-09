@@ -39,6 +39,7 @@ class CameraNormalis(object):
 
             # Init 4 Port Relay
             self.relay = FourPortRelay(self.cfg['relays'])
+            print('to relay')
             self.player_switch = SinglePortRelay()
 
         # Runtime mode specific initializations

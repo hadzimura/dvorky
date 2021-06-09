@@ -23,14 +23,16 @@ class SinglePortRelay(object):
         self.test = 'OK'
 
         GPIO.setup(self.pin, GPIO.OUT)
-
+        print('looping')
         while True:
             GPIO.output(self.pin, GPIO.HIGH)
+            print('aaa')
             time.sleep(1)
             GPIO.output(self.pin, GPIO.LOW)
+            print('aaa')
             time.sleep(1)
             print('aaa')
-
+        print('what')
         self.state = None
         # self.state = {
         #     1: self.off(1),
