@@ -54,11 +54,11 @@ class FourPortRelay(object):
                 relay_state = 'Fail'
 
     def on(self, relay_number):
-        GPIO.output(self.pinout[relay_number], GPIO.HIGH)
+        GPIO.output(self.pinout[str(relay_number)], GPIO.HIGH)
         self.state[relay_number] = True
 
     def off(self, relay_number):
-        GPIO.output(self.pinout[relay_number], GPIO.LOW)
+        GPIO.output(self.pinout[str(relay_number)], GPIO.LOW)
         self.state[relay_number] = False
 
     def crowd_off(self):
