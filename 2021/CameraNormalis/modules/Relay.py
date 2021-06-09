@@ -6,6 +6,32 @@ from random import randrange
 import time
 
 
+class SinglePortRelay(object):
+
+    def __init__(self):
+
+        # Setting a current GPIO mode
+        GPIO.setmode(GPIO.BCM)
+
+        # Removing the warnings
+        GPIO.setwarnings(False)
+
+        self.pins = list(self.pinout.values())
+
+        # TODO: what?
+        self.test = 'OK'
+
+        GPIO.setup(self.pins, GPIO.OUT)
+
+        # self.state = {
+        #     1: self.off(1),
+        #     2: self.off(2),
+        #     3: self.off(3),
+        #     4: self.off(4)
+        # }
+
+
+
 class FourPortRelay(object):
 
     def __init__(self, pinout):

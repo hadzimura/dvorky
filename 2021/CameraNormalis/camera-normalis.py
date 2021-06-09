@@ -35,7 +35,7 @@ class CameraNormalis(object):
         if self.runtime_mode != 'macos':
 
             # Init LCD Display
-            self.lcd = LcdMini()
+            # self.lcd = LcdMini()
 
             # Init 4 Port Relay
             self.relay = FourPortRelay(self.cfg['relays'])
@@ -47,17 +47,17 @@ class CameraNormalis(object):
             self.controller = AKAI_LPD8_MIDI(device_name=self.cfg['midi_device'])
 
         # All set, display LCD Welcome Message
-        if self.runtime_mode != 'macos':
-            try:
-                if self.lcd.state is True:
-                    self.lcd.clear()
-                    self.lcd.create('CAMERA NORMALIS\nControl... {}\nRelays.... {}\nAudio.... {}'.format(
-                        str(self.controller.test), str(self.relay.test), str(self.audio.count)))
-                else:
-                    # LCD init failed, who cares?
-                    pass
-            except Exception:
-                pass
+        # if self.runtime_mode != 'macos':
+        #     try:
+        #         if self.lcd.state is True:
+        #             self.lcd.clear()
+        #             self.lcd.create('CAMERA NORMALIS\nControl... {}\nRelays.... {}\nAudio.... {}'.format(
+        #                 str(self.controller.test), str(self.relay.test), str(self.audio.count)))
+        #         else:
+        #             # LCD init failed, who cares?
+        #             pass
+        #     except Exception:
+        #         pass
 
     def run(self):
         """ Execute the Main Camera Normalis Loop based on the selected runtime mode """
@@ -89,6 +89,7 @@ class CameraNormalis(object):
                 # ...rinse and repeat :)
 
         elif self.runtime_mode == 'tuneup':
+            self.test
             while True:
                 self.audio.speech()
 
