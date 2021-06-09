@@ -72,12 +72,12 @@ class FourPortRelay(object):
         """ Shut the relays randomly over fixed timespan (should be 4 seconds) """
         self.on(1)
         self.on(2)
-        time.sleep(2)
+        time.sleep(3)
         self.on(3)
-        time.sleep(2)
+        time.sleep(1)
         self.off(3)
         self.on(4)
-        time.sleep(2)
+        time.sleep(1)
         self.off(4)
         return None
 
