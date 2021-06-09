@@ -16,7 +16,7 @@ class SinglePortRelay(object):
         # Removing the warnings
         GPIO.setwarnings(False)
 
-        self.pin = 5
+        self.pin = 3
 
 
         # TODO: what?
