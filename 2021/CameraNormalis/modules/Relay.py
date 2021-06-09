@@ -18,6 +18,7 @@ class SinglePortRelay(object):
 
         self.pin = 5
 
+
         # TODO: what?
         self.test = 'OK'
 
