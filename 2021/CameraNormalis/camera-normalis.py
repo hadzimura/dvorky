@@ -6,7 +6,6 @@ from modules.Audio import Player
 from modules.Controller import AKAI_LPD8_MIDI
 # from modules.Display import LcdMini
 from modules.Relay import FourPortRelay
-from modules.Relay import SinglePortRelay
 
 import argparse
 from json import load
