@@ -38,7 +38,7 @@ class CameraNormalis(object):
             # self.lcd = LcdMini()
 
             # Init 4 Port Relay
-            # self.relay = FourPortRelay(self.cfg['relays'])
+            self.relay = FourPortRelay(self.cfg['relays'])
             print('to relay')
             self.player_switch = SinglePortRelay()
 
@@ -74,7 +74,7 @@ class CameraNormalis(object):
                                      volume_change_period=self.cfg_show['volume_change_period'])
 
                 # Play the speech announcement
-                self.audio.announce()
+                # self.audio.announce()
 
                 # TODO: ...and shut the Arduino crowd
                 # self.relay.crowd_control(total_time=self.cfg_show['crowd_control_fadeout'])
@@ -83,7 +83,7 @@ class CameraNormalis(object):
                 self.audio.speech()
 
                 # Play the Clap Your Hands outro
-                self.audio.clap_your_hands()
+                # self.audio.clap_your_hands()
 
                 # Moment for the inner peace
                 time.sleep(self.cfg_show['end_silence'])
@@ -91,6 +91,12 @@ class CameraNormalis(object):
                 # ...rinse and repeat :)
 
         elif self.runtime_mode == 'tuneup':
+            self.relay.crowd_on()
+            time.sleep(5)
+            self.relay.crowd_off()
+            time.sleep(5)
+            self.relay.crowd_on()
+            exit()
             self.player_switch.on()
             time.sleep(1)
             self.player_switch.off()
@@ -110,7 +116,7 @@ class CameraNormalis(object):
                 # self.audio.play_track(self.audio.get_track('announce'))
 
                 # ...and shut the Arduino crowd
-                # self.relay.crowd_control(total_time=4)
+                self.relay.crowd_control(total_time=4)
 
                 # Crowd was hushed: play the speech
                 self.audio.play_track(self.audio.get_track('speech'))

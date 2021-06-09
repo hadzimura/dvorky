@@ -6,51 +6,6 @@ from random import randrange
 import time
 
 
-class SinglePortRelay(object):
-
-    def __init__(self):
-
-        # Setting a current GPIO mode
-        GPIO.setmode(GPIO.BCM)
-
-        # Removing the warnings
-        GPIO.setwarnings(False)
-
-        self.pin = 3
-
-
-        # TODO: what?
-        self.test = 'OK'
-
-        GPIO.setup(self.pin, GPIO.OUT)
-        print('looping')
-        while True:
-            GPIO.output(self.pin, GPIO.HIGH)
-            print('aaa')
-            time.sleep(1)
-            GPIO.output(self.pin, GPIO.LOW)
-            print('aaa')
-            time.sleep(1)
-            print('aaa')
-        print('what')
-        self.state = None
-        # self.state = {
-        #     1: self.off(1),
-        #     2: self.off(2),
-        #     3: self.off(3),
-        #     4: self.off(4)
-        # }
-
-    def on(self):
-        GPIO.output(self.pin, GPIO.HIGH)
-        self.state = True
-
-    def off(self):
-        GPIO.output(self.pin, GPIO.LOW)
-        self.state = False
-
-
-
 class FourPortRelay(object):
 
     def __init__(self, pinout):
@@ -104,16 +59,24 @@ class FourPortRelay(object):
         GPIO.output(self.pinout[relay_number], GPIO.LOW)
         self.state[relay_number] = False
 
-    def crowd_control(self, total_time=4):
+    def crowd_off(self):
         """ Shut the relays randomly over fixed timespan (should be 4 seconds) """
-        wait_time = total_time / len(self.state)
-        all_clear = False
+        self.off(3)
+        time.sleep(1)
+        self.off(4)
+        return None
 
-        while all_clear is False:
-            test_state = randrange(1, 4, 1)
-            if self.state[test_state] is True:
-                self.off(test_state)
-                time.sleep(wait_time)
+    def crowd_on(self):
+        """ Shut the relays randomly over fixed timespan (should be 4 seconds) """
+        self.on(3)
+        self.on(4)
+        time.sleep(2)
+        self.on(1)
+        time.sleep(0.1)
+        self.off(1)
+        self.on(2)
+        time.sleep(0.1)
+        self.off(2)
         return None
 
     @staticmethod
