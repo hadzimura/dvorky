@@ -19,6 +19,8 @@ class FourPortRelay(object):
         self.pinout = pinout
         self.pins = list(self.pinout.values())
 
+        print(self.pinout)
+
         # TODO: what?
         self.test = 'OK'
 
