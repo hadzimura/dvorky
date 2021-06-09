@@ -16,19 +16,27 @@ class SinglePortRelay(object):
         # Removing the warnings
         GPIO.setwarnings(False)
 
-        self.pins = list(self.pinout.values())
+        self.pin = 15
 
         # TODO: what?
         self.test = 'OK'
 
-        GPIO.setup(self.pins, GPIO.OUT)
-
+        GPIO.setup(self.pin, GPIO.OUT)
+        self.state = None
         # self.state = {
         #     1: self.off(1),
         #     2: self.off(2),
         #     3: self.off(3),
         #     4: self.off(4)
         # }
+
+    def on(self):
+        GPIO.output(self.pin, GPIO.HIGH)
+        self.state = True
+
+    def off(self):
+        GPIO.output(self.pin, GPIO.LOW)
+        self.state = False
 
 
 

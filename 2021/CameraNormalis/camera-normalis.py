@@ -4,8 +4,9 @@ import time
 
 from modules.Audio import Player
 from modules.Controller import AKAI_LPD8_MIDI
-from modules.Display import LcdMini
+# from modules.Display import LcdMini
 from modules.Relay import FourPortRelay
+from modules.Relay import SinglePortRelay
 
 import argparse
 from json import load
@@ -15,7 +16,6 @@ from random import randrange
 
 class CameraNormalis(object):
 
-    # def __init__(self, playtime=10, midi=None, relay=None, audio=None, display=None):
     def __init__(self, cn_config, runtime_mode):
 
         self.cfg = cn_config
@@ -39,6 +39,7 @@ class CameraNormalis(object):
 
             # Init 4 Port Relay
             self.relay = FourPortRelay(self.cfg['relays'])
+            self.player_switch = SinglePortRelay()
 
         # Runtime mode specific initializations
         if self.runtime_mode == 'tuneup':
@@ -89,7 +90,10 @@ class CameraNormalis(object):
                 # ...rinse and repeat :)
 
         elif self.runtime_mode == 'tuneup':
-            self.test
+            self.player_switch.on()
+            time.sleep(1)
+            self.player_switch.off()
+            exit()
             while True:
                 self.audio.speech()
 
