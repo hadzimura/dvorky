@@ -106,7 +106,11 @@ class CameraNormalis(object):
             print(self.relay.state)
             time.sleep(2)
             self.relay.on('control1')
+            time.sleep(1)
+            self.relay.off('control1')
             self.relay.on('control2')
+            time.sleep(1)
+            self.relay.off('control2')
             exit()
 
             self.relay.crowd_on()
