@@ -163,25 +163,27 @@ class CameraNormalis(object):
                 if message.is_cc():
                     # Volume
                     if getattr(message, 'control'):
-                        print('{} | Volume ({}) - {}'.format(msg.type, msg.control, msg.value))
+                        pass
+                        # print('{} | Volume ({}) - {}'.format(msg.type, msg.control, msg.value))
                 elif message.is_meta:
                     pass
-                elif message.is_realtime:
-                    if getattr(msg, 'note'):
+                else:
+                    if getattr(message, 'note'):
+                        if message.note == 36:
+                            relay = 'control1'
+                        elif message.note == 37:
+                            relay = 'control2'
+                        elif message.note == 38:
+                            relay = 'power1'
+                        elif message.note == 39:
+                            relay = 'power2'
+                        # relay = message.note - 35
 
-                        relay = msg.note - 35
-
-                        if msg.type == 'note_on':
-                            if self.relay.state[relay] is None:
-                                self.relay.on(relay)
-                            elif self.relay.state[relay] is True:
+                        if message.type == 'note_on':
+                            if self.relay.state[relay] is True:
                                 self.relay.off(relay)
                             elif self.relay.state[relay] is False:
                                 self.relay.on(relay)
-
-                        self.lcd.clear()
-                        self.lcd.create('Relay: {}\n' + str(relay))
-                        print('Relay on ({}) - {}'.format(str(msg.note - 35), msg.type))
 
 
 if __name__ == '__main__':
