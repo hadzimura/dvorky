@@ -70,7 +70,7 @@ class CameraNormalis(object):
                 self.relay.on('control1')
                 self.relay.on('control2')
 
-                self.relay.crowd_on()
+                # self.relay.crowd_on()
                 # Play the crowds (custom samples handled inside the class)
                 self.audio.partytime(self.total_time,
                                      scene_probability=self.cfg_show['scene_probability'],
