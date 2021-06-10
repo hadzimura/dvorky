@@ -89,7 +89,7 @@ class CameraNormalis(object):
 
         elif self.runtime_mode == 'tuneup':
             self.relay.crowd_on()
-            time.sleep(500)
+            time.sleep(5)
             self.relay.crowd_off()
             time.sleep(5)
             self.relay.crowd_on()
