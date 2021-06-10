@@ -119,7 +119,7 @@ class CameraNormalis(object):
             self.relay.control_on('control2')
             time.sleep(0.5)
             self.relay.control_off('control2')
-
+            exit()
             print('power off')
             self.relay.power_off('power2')
             exit()
