@@ -86,8 +86,8 @@ class FourPortRelay(object):
 
         time.sleep(2)
 
-        self.flip('control1', 1)
-        self.flip('control2', 1)
+        self.flip('control1', 0.3)
+        self.flip('control2', 0.3)
 
     @staticmethod
     def shutdown(self):
