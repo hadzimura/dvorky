@@ -71,10 +71,10 @@ class FourPortRelay(object):
     def flip(self, relay, flip_time):
         """ FLip """
         print('Flip on {}'.format(relay))
-        self.on(relay)
+        self.off(relay)
         time.sleep(1)
         print('Flip off {}'.format(relay))
-        self.off(relay)
+        self.on(relay)
 
     def crowd_off(self):
         """ Turn off the MP3 relays """
