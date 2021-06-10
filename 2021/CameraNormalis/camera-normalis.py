@@ -161,6 +161,7 @@ class CameraNormalis(object):
         with mido.open_input(self.controller.device_id) as inport:
             # https://mido.readthedocs.io/en/latest/message_types.html
             for message in inport:
+                print(message)
                 # Input mode on controller is set to "CC" – control_change
                 if message.is_cc():
                     # Volume
