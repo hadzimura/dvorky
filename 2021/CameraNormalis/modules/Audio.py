@@ -20,8 +20,8 @@ class Player(object):
     def __init__(self, audio_path=None, audio_format='mp3'):
 
         self.audio_path = audio_path
-        self.default_volume = 0.5
-        self.current_volume = 0.5
+        self.default_volume = 0.2
+        self.current_volume = 0.2
         self.speech_volume = 1
         self.scene_volume = 0.7
 
