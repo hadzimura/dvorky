@@ -72,19 +72,19 @@ class FourPortRelay(object):
 
     def crowd_on(self):
         """ Shut the relays randomly over fixed timespan (should be 4 seconds) """
-        print('1+2: on')
-        self.on(1)
-        self.on(2)
+        print('3+4: on')
+        self.on(3)
+        self.on(4)
         time.sleep(2)
 
-        print('3: flip')
-        self.on(3)
+        print('1: flip')
+        self.on(1)
+        time.sleep(0.5)
+        self.off(1)
+        print('2: flip')
+        self.on(2)
         time.sleep(1)
-        self.off(3)
-        print('4: flip')
-        self.on(4)
-        time.sleep(1)
-        self.off(4)
+        self.off(2)
         return None
 
     @staticmethod
