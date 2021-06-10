@@ -65,15 +65,19 @@ class CameraNormalis(object):
             # True Showtime Main Endless Loop is here
             while True:
 
+                self.relay.on('power1')
+                self.relay.on('power2')
+
                 # Play the crowds (custom samples handled inside the class)
                 self.audio.partytime(self.total_time,
                                      scene_probability=self.cfg_show['scene_probability'],
                                      volume_change_period=self.cfg_show['volume_change_period'])
-                self.relay.on('power1')
-                self.relay.on('power2')
+
+                self.relay.off('power1')
+                self.relay.off('power2')
 
                 # Play the speech announcement
-                self.audio.announce()
+                # self.audio.announce()
 
                 # TODO: ...and shut the Arduino crowd
                 # self.relay.crowd_control(total_time=self.cfg_show['crowd_control_fadeout'])
