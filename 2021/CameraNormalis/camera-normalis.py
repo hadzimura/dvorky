@@ -100,6 +100,14 @@ class CameraNormalis(object):
 
         elif self.runtime_mode == 'tuneup':
             # self.configuration()
+            print('power up')
+            self.relay.off('power1')
+            self.relay.off('power2')
+            print(self.relay.state)
+            time.sleep(2)
+            self.relay.on('control1')
+            self.relay.on('control2')
+            exit()
 
             self.relay.crowd_on()
             time.sleep(5)

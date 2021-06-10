@@ -33,8 +33,8 @@ class FourPortRelay(object):
              'power2': False
         }
 
-        self.on('control1')
-        self.on('control2')
+        # self.on('control1')
+        # self.on('control2')
         # self.off('power1')
         # self.off('power2')
 
