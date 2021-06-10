@@ -102,12 +102,9 @@ class CameraNormalis(object):
             # self.configuration()
             print('power on')
             self.relay.power_on('power1')
-            self.relay.power_on('power2')
-            print(self.relay.state)
             time.sleep(5)
             print('power off')
             self.relay.power_off('power1')
-            self.relay.power_off('power2')
             exit()
 
 
