@@ -58,6 +58,26 @@ class FourPortRelay(object):
                 print('Relay {} on Pin {}: ERROR'.format(str(pin), current_pin))
                 relay_state = 'Fail'
 
+    def power_on(self, relay_name):
+        if self.state[relay_name] is False:
+            GPIO.output(self.pinout[relay_name], GPIO.HIGH)
+            self.state[relay_name] = True
+
+    def power_off(self, relay_name):
+        if self.state[relay_name] is True:
+            GPIO.output(self.pinout[relay_name], GPIO.LOW)
+            self.state[relay_name] = False
+
+    def control_on(self, control_name):
+        if self.state[control_name] is False:
+            GPIO.output(self.pinout[control_name], GPIO.HIGH)
+            self.state[control_name] = True
+
+    def control_off(self, control_name):
+        if self.state[control_name] is True:
+            GPIO.output(self.pinout[control_name], GPIO.LOW)
+            self.state[control_name] = False
+
     def on(self, relay_name):
         GPIO.output(self.pinout[relay_name], GPIO.HIGH)
         self.state[relay_name] = True
