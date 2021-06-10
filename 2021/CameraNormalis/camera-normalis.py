@@ -105,9 +105,12 @@ class CameraNormalis(object):
             self.relay.off('power2')
             print(self.relay.state)
             time.sleep(2)
+            print('flip1')
             self.relay.on('control1')
             time.sleep(1)
             self.relay.off('control1')
+
+            print('flip2')
             self.relay.on('control2')
             time.sleep(1)
             self.relay.off('control2')
