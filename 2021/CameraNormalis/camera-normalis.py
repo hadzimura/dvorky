@@ -67,9 +67,7 @@ class CameraNormalis(object):
 
                 self.relay.off('power1')
                 self.relay.off('power2')
-                self.relay.off('control1')
-                self.relay.off('control2')
-
+                print(self.relay.state)
                 # self.relay.crowd_on()
                 # Play the crowds (custom samples handled inside the class)
                 self.audio.partytime(self.total_time,
@@ -78,6 +76,8 @@ class CameraNormalis(object):
 
                 self.relay.on('power1')
                 self.relay.on('power2')
+                print(self.relay.state)
+
                 #self.relay.off('power1')
                 #self.relay.off('power2')
 
