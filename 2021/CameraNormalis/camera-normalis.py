@@ -66,7 +66,7 @@ class CameraNormalis(object):
             while True:
 
                 self.relay.off('power1')
-                self.relay.off<('power2')
+                self.relay.off('power2')
                 self.relay.off('control1')
                 self.relay.off('control2')
 
