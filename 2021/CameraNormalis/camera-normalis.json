@@ -12,10 +12,10 @@
     "volume_change_period": 15
   },
   "relays": {
-    "1": 14,
-    "2": 15,
-    "3": 17,
-    "4": 18
+    "control1": 14,
+    "control2": 15,
+    "power1": 17,
+    "power2": 18
   },
   "root": "/home/pi/dvorky/2021/CameraNormalis"
 }

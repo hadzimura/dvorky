@@ -102,14 +102,13 @@ class CameraNormalis(object):
             # self.relay.on(4)
             # exit()
 
-            self.relay.crowd_off()
-            time.sleep(1)
-
             self.relay.crowd_on()
             time.sleep(5)
             self.relay.crowd_off()
             time.sleep(5)
             self.relay.crowd_on()
+            time.sleep(5)
+            self.relay.crowd_off()
             exit()
             self.player_switch.on()
             time.sleep(1)
@@ -163,9 +162,7 @@ class CameraNormalis(object):
                 # Input mode on controller is set to "CC" – control_change
                 if message.is_cc():
                     # Volume
-                    if getattr(msg, 'control'):
-                        self.lcd.clear()
-                        self.lcd.create('Knob: {}\nVolume: {}'.format(msg.control, msg.value))
+                    if getattr(message, 'control'):
                         print('{} | Volume ({}) - {}'.format(msg.type, msg.control, msg.value))
                 elif message.is_meta:
                     pass

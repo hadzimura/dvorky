@@ -26,12 +26,17 @@ class FourPortRelay(object):
 
         GPIO.setup(self.pins, GPIO.OUT)
 
-        # self.state = {
-        #     1: self.off(1),
-        #     2: self.off(2),
-        #     3: self.off(3),
-        #     4: self.off(4)
-        # }
+        self.state = {
+             'control1': False,
+             'control2': False,
+             'power1': False,
+             'power2': False
+        }
+
+        self.off('control1')
+        self.off('control2')
+        self.off('power1')
+        self.off('power2')
 
     def self_test(self, delay_time=1):
 
@@ -53,39 +58,36 @@ class FourPortRelay(object):
                 print('Relay {} on Pin {}: ERROR'.format(str(pin), current_pin))
                 relay_state = 'Fail'
 
-    def on(self, relay_number):
-        GPIO.output(self.pinout[str(relay_number)], GPIO.HIGH)
-        # self.state[relay_number] = True
+    def on(self, relay_name):
+        GPIO.output(self.pinout[relay_name], GPIO.HIGH)
+        self.state[relay_name] = True
 
-    def off(self, relay_number):
-        GPIO.output(self.pinout[str(relay_number)], GPIO.LOW)
-        # self.state[relay_number] = False
+    def off(self, relay_name):
+        GPIO.output(self.pinout[relay_name], GPIO.LOW)
+        self.state[relay_name] = False
+
+    def flip(self, relay, flip_time):
+        """ FLip """
+        self.on(relay)
+        time.sleep(flip_time)
+        self.off(relay)
 
     def crowd_off(self):
-        """ Shut the relays randomly over fixed timespan (should be 4 seconds) """
-        print('1: off')
-        self.off(1)
+        """ Turn off the MP3 relays """
+        self.off('power1')
         time.sleep(1)
-        print('2: off')
-        self.off(2)
-        return None
+        self.off('power2')
 
     def crowd_on(self):
-        """ Shut the relays randomly over fixed timespan (should be 4 seconds) """
-        print('3+4: on')
-        self.on(3)
-        self.on(4)
+        """ Turn on the MP3 relays and send the control pulse for auto-playback """
+
+        self.on('power1')
+        self.on('power2')
+
         time.sleep(2)
 
-        print('1: flip')
-        self.on(1)
-        time.sleep(0.5)
-        self.off(1)
-        print('2: flip')
-        self.on(2)
-        time.sleep(1)
-        self.off(2)
-        return None
+        self.flip('control1', 0.5)
+        self.flip('control2', 0.5)
 
     @staticmethod
     def shutdown(self):
