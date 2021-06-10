@@ -88,6 +88,8 @@ class CameraNormalis(object):
                 # ...rinse and repeat :)
 
         elif self.runtime_mode == 'tuneup':
+            self.configuration()
+            exit()
             # self.relay.off(1)
             # self.relay.off(2)
             # self.relay.off(3)
