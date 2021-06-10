@@ -64,20 +64,31 @@ class CameraNormalis(object):
 
             # True Showtime Main Endless Loop is here
             while True:
+                self.relay.power_off('power1')
+                self.relay.power_off('power2')
+                time.sleep(2)
+                self.relay.power_on('power1')
+                self.relay.power_on('power2')
+                time.sleep(2)
 
-                self.relay.off('power1')
-                self.relay.off('power2')
-                print(self.relay.state)
+                self.relay.control_on('control1')
+                time.sleep(0.5)
+                self.relay.control_off('control1')
+
+                print('c2')
+
+                self.relay.control_on('control2')
+                time.sleep(0.5)
+                self.relay.control_off('control2')
+
                 # self.relay.crowd_on()
                 # Play the crowds (custom samples handled inside the class)
                 self.audio.partytime(self.total_time,
                                      scene_probability=self.cfg_show['scene_probability'],
                                      volume_change_period=self.cfg_show['volume_change_period'])
 
-                self.relay.on('power1')
-                self.relay.on('power2')
-                print(self.relay.state)
-
+                self.relay.power_off('power1')
+                self.relay.power_off('power2')
                 #self.relay.off('power1')
                 #self.relay.off('power2')
 
@@ -94,7 +105,7 @@ class CameraNormalis(object):
                 # self.audio.clap_your_hands()
 
                 # Moment for the inner peace
-                time.sleep(self.cfg_show['end_silence'])
+                # time.sleep(self.cfg_show['end_silence'])
 
                 # ...rinse and repeat :)
 
