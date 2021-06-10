@@ -61,12 +61,12 @@ class FourPortRelay(object):
     def on(self, relay_name):
         GPIO.output(self.pinout[relay_name], GPIO.HIGH)
         self.state[relay_name] = True
-        print(self.state)
+        print('on', self.state)
 
     def off(self, relay_name):
         GPIO.output(self.pinout[relay_name], GPIO.LOW)
         self.state[relay_name] = False
-        print(self.state)
+        print('off', self.state)
 
     def flip(self, relay, flip_time):
         """ FLip """
