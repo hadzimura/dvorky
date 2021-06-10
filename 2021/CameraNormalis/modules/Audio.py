@@ -214,7 +214,7 @@ class Player(object):
                 stop += 1
                 step = 1
 
-            # print('Changing: start={}, stop={}'.format(str(start), str(stop)))
+            print('Changing: start={}, stop={}'.format(str(start), str(stop)))
             for volume_step in range(start, stop, step):
                 # print(' - {}'.format(str(volume_step / 10)))
                 pygame.mixer.music.set_volume(volume_step / 10)
