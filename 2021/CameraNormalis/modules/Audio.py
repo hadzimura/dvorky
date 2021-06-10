@@ -151,7 +151,7 @@ class Player(object):
         """
         current_volume = int(self.current_volume * 10)
         min_volume = 1
-        max_volume = 9
+        max_volume = 6
 
         # 1: 1-1=0
         # 2: 2-1=-1
