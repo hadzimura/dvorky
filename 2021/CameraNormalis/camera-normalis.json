@@ -8,7 +8,7 @@
     "crowd_control_fadeout": 5,
     "end_silence": 5,
     "scene_probability": 4,
-    "total_time": 2,
+    "total_time": 5,
     "volume_change_period": 15
   },
   "relays": {
