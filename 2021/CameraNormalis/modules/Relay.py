@@ -68,8 +68,10 @@ class FourPortRelay(object):
 
     def flip(self, relay, flip_time):
         """ FLip """
+        print('Flip on {}'.format(relay))
         self.on(relay)
-        time.sleep(flip_time)
+        time.sleep(1)
+        print('Flip off {}'.format(relay))
         self.off(relay)
 
     def crowd_off(self):
