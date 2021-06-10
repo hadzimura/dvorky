@@ -68,9 +68,11 @@ class FourPortRelay(object):
 
     def flip(self, relay, flip_time):
         """ FLip """
-        self.on(relay)
-        # time.sleep(flip_time)
-        self.off(relay)
+        for a in range(0, 1):
+            if self.state[relay] is True:
+                self.off(relay)
+            elif self.state[relay] is False:
+                self.on(relay)
 
     def crowd_off(self):
         """ Turn off the MP3 relays """
