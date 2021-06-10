@@ -69,6 +69,8 @@ class CameraNormalis(object):
                 self.audio.partytime(self.total_time,
                                      scene_probability=self.cfg_show['scene_probability'],
                                      volume_change_period=self.cfg_show['volume_change_period'])
+                self.relay.on('power1')
+                self.relay.on('power2')
 
                 # Play the speech announcement
                 self.audio.announce()
