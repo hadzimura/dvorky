@@ -65,8 +65,10 @@ class CameraNormalis(object):
             # True Showtime Main Endless Loop is here
             while True:
 
-                #self.relay.on('power1')
-                #self.relay.on('power2')
+                self.relay.on('power1')
+                self.relay.on('power2')
+                self.relay.on('control1')
+                self.relay.on('control2')
 
                 self.relay.crowd_on()
                 # Play the crowds (custom samples handled inside the class)
