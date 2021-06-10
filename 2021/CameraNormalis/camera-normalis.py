@@ -73,8 +73,8 @@ class CameraNormalis(object):
                                      scene_probability=self.cfg_show['scene_probability'],
                                      volume_change_period=self.cfg_show['volume_change_period'])
 
-                self.relay.off('power1')
-                self.relay.off('power2')
+                #self.relay.off('power1')
+                #self.relay.off('power2')
 
                 # Play the speech announcement
                 # self.audio.announce()
