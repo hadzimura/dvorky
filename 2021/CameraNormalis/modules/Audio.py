@@ -66,12 +66,17 @@ class Player(object):
 
         # Start time
         show_start = time.time()
+        first_pass = True
 
         # Play ambient
         while time.time() - show_start < show_lenght:
 
-            # Get and play randomly chosen track from 'ambient' category
-            self.play_track(self.get_track('ambient'), set_volume=self.current_volume)
+            if first_pass is True:
+                self.play_track(self.get_track('ambient'), set_volume=0)
+                self.volume(set_volume=self.default_volume, step_delay=1)
+            else:
+                # Get and play randomly chosen track from 'ambient' category
+                self.play_track(self.get_track('ambient'), set_volume=self.current_volume)
 
             # Tweak the track volume during playtime
             self.animate_track(change_period=volume_change_period)
@@ -109,7 +114,8 @@ class Player(object):
 
     def speech(self):
         self.play_track(self.get_track('speech'), set_volume=self.speech_volume)
-        self.wait_for_end_of_track()
+        # INFO: Wait for the end of the track moved into the main loop
+        # self.wait_for_end_of_track()
         return None
 
     def announce(self):
@@ -151,7 +157,7 @@ class Player(object):
         """
         current_volume = int(self.current_volume * 10)
         min_volume = 1
-        max_volume = 6
+        max_volume = 7
 
         # 1: 1-1=0
         # 2: 2-1=-1

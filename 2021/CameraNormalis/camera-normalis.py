@@ -87,11 +87,6 @@ class CameraNormalis(object):
                                      scene_probability=self.cfg_show['scene_probability'],
                                      volume_change_period=self.cfg_show['volume_change_period'])
 
-                self.relay.power_off('power1')
-                self.relay.power_off('power2')
-                #self.relay.off('power1')
-                #self.relay.off('power2')
-
                 # Play the speech announcement
                 # self.audio.announce()
 
@@ -100,6 +95,10 @@ class CameraNormalis(object):
 
                 # Crowd was hushed: play the speech
                 self.audio.speech()
+                self.relay.power_off('power1')
+                self.relay.power_off('power2')
+                self.audio.wait_for_end_of_track()
+
 
                 # Play the Clap Your Hands outro
                 # self.audio.clap_your_hands()
