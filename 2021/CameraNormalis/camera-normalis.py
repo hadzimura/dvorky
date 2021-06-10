@@ -71,7 +71,7 @@ class CameraNormalis(object):
                                      volume_change_period=self.cfg_show['volume_change_period'])
 
                 # Play the speech announcement
-                # self.audio.announce()
+                self.audio.announce()
 
                 # TODO: ...and shut the Arduino crowd
                 # self.relay.crowd_control(total_time=self.cfg_show['crowd_control_fadeout'])
