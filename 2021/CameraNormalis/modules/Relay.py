@@ -61,14 +61,14 @@ class FourPortRelay(object):
     def power_on(self, relay_name):
         print('pon - start', relay_name, self.state[relay_name])
         if self.state[relay_name] is False:
-            GPIO.output(self.pinout[relay_name], GPIO.HIGH)
+            GPIO.output(self.pinout[relay_name], GPIO.LOW)
             self.state[relay_name] = True
         print('pon - end', relay_name, self.state[relay_name])
 
     def power_off(self, relay_name):
         print('pof - start', relay_name, self.state[relay_name])
         if self.state[relay_name] is True:
-            GPIO.output(self.pinout[relay_name], GPIO.LOW)
+            GPIO.output(self.pinout[relay_name], GPIO.HIGH)
             self.state[relay_name] = False
         print('pof - end', relay_name, self.state[relay_name])
 
