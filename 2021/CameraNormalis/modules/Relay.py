@@ -33,10 +33,10 @@ class FourPortRelay(object):
              'power2': False
         }
 
-        self.off('control1')
-        self.off('control2')
-        self.off('power1')
-        self.off('power2')
+        # self.off('control1')
+        # self.off('control2')
+        # self.off('power1')
+        # self.off('power2')
 
     def self_test(self, delay_time=1):
 
@@ -61,10 +61,12 @@ class FourPortRelay(object):
     def on(self, relay_name):
         GPIO.output(self.pinout[relay_name], GPIO.HIGH)
         self.state[relay_name] = True
+        print(self.state)
 
     def off(self, relay_name):
         GPIO.output(self.pinout[relay_name], GPIO.LOW)
         self.state[relay_name] = False
+        print(self.state)
 
     def flip(self, relay, flip_time):
         """ FLip """
