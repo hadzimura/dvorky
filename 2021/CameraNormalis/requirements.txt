@@ -1,8 +1,0 @@
-Adafruit_SSD1306
-mido
-nrf24
-pigpio
-playsound
-pygame
-python-rtmidi
-RPi
