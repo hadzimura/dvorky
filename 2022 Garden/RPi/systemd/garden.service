@@ -1,0 +1,15 @@
+[Unit]
+Description=Garden
+After=network.target
+
+[Service]
+Type=simple
+ExecStart=./garden.sh
+WorkingDirectory=/home/pi/Garden/
+StandardOutput=inherit
+StandardError=inherit
+Restart=always
+User=pi
+
+[Install]
+WantedBy=multi-user.target

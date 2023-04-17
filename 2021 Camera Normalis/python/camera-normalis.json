@@ -1,0 +1,21 @@
+{
+  "audio": {
+    "format": "mp3",
+    "path": "/home/pi/dvorky/2021/audio_files"
+  },
+  "midi_device": "LPD8",
+  "showtime": {
+    "crowd_control_fadeout": 5,
+    "end_silence": 5,
+    "scene_probability": 4,
+    "total_time": 5,
+    "volume_change_period": 15
+  },
+  "relays": {
+    "control1": 14,
+    "control2": 15,
+    "power1": 17,
+    "power2": 18
+  },
+  "root": "/home/pi/dvorky/2021/CameraNormalis"
+}
